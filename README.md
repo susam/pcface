@@ -19,7 +19,7 @@ Contents
 * [Credit](#credit)
 * [License](#license)
 * [Support](#support)
-* [Channel](#channel)
+* [Channels](#channels)
 * [More](#more)
 
 
@@ -50,6 +50,11 @@ you want to do with the resource files mentioned above, you would
 probably have to write some code to translate the bitmap of a
 character to pixels on screen. The next section provides more details
 about this.
+
+The bitmap array files are also available at the following CDN URLs:
+
+- https://cdn.jsdelivr.net/npm/pcface/fontlist.js
+- https://cdn.jsdelivr.net/npm/pcface/fontmap.js
 
 
 Bitmap Format
