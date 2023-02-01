@@ -1,0 +1,38 @@
+{
+  "name": "pcface",
+  "version": "0.1.0",
+  "description": "Bitmap arrays for CP437 glyphs",
+  "main": "fontlist.js",
+  "files": [
+    "fontlist.js",
+    "fontmap.js",
+    "fontlist.html",
+    "fontmap.html"
+  ],
+  "keywords": [
+    "dos",
+    "cp437",
+    "font",
+    "glyph",
+    "typeface",
+    "browser"
+  ],
+  "homepage": "https://github.com/susam/pcface",
+  "bugs": "https://github.com/susam/pcface/issues",
+  "license": "MIT",
+  "author": "Susam Pal (https://susam.net/)",
+  "repository": "github:susam/pcface",
+  "devDependencies": {
+    "standard": "latest",
+    "eslint-plugin-html": "latest"
+  },
+  "scripts": {
+    "lint": "standard --plugin html *.html"
+  },
+  "standard": {
+    "global": [
+      "PC_FACE_LIST",
+      "PC_FACE_MAP"
+    ]
+  }
+}

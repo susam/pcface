@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PC Face List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <style>
+      body {
+        background: #111;
+        margin: 0;
+        padding: 10px;
+      }
+      canvas {
+        background: #000;
+        display: block;
+        margin: 0 auto;
+        box-sizing: border-box;
+        border: 1px solid #333;
+        image-rendering: crisp-edges;
+      }
+      div {
+        text-align: center;
+      }
+    </style>
+    <script src="../fontlist.js"></script>
+    <script>
+      'use strict'
+
+      const CANVAS_WIDTH = 640
+      const CANVAS_HEIGHT = 224
+
+      const FONT_WIDTH = 8
+      const FONT_HEIGHT = 16
+
+      let canvas
+      let ctx
+
+      function init () {
+        canvas = document.getElementById('canvas')
+        ctx = canvas.getContext('2d')
+        canvas.width = CANVAS_WIDTH
+        canvas.height = CANVAS_HEIGHT
+        ctx.fillStyle = '#000'
+        ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
+        ctx.fillStyle = '#0f0';
+        let lines = [
+          range(0, 40), range(40, 80), range(80, 120), range(120, 160),
+          range(160, 200), range(200, 240), range(240, 256)
+        ]
+        drawLines(lines, 0, 0, 2)
+      }
+
+      function range (start, stop) {
+        const result = []
+        for (let i = start; i < stop; i++) {
+          result.push(i)
+        }
+        return result
+      }
+
+      function drawChar (c, x, y, s) {
+        const bitmap = PC_FACE_LIST[c]
+        for (let i = 0; i < bitmap.length; i++) {
+          for (let j = 0; j < 8; j++) {
+            const mask = 1 << (7 - j)
+            if ((bitmap[i] & mask) !== 0) {
+              ctx.fillRect(x + s * j, y + s * i, s, s)
+            }
+          }
+        }
+      }
+
+      function drawLine (line, x, y, s) {
+        for (let i = 0; i < line.length; i++) {
+          drawChar(line[i], x + i * s * FONT_WIDTH, y, s)
+        }
+      }
+
+      function drawLines (lines, x, y, s) {
+        for (let i = 0; i < lines.length; i++) {
+          drawLine(lines[i], x, y + i * s * FONT_HEIGHT, s)
+        }
+      }
+
+      window.addEventListener('load', init)
+    </script>
+  </head>
+  <body>
+    <canvas id="canvas">
+    </canvas>
+  </body>
+</html>

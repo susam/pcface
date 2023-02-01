@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PC Face Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <style>
+      body {
+        background: #111;
+        margin: 0;
+      }
+      canvas {
+        background: #000;
+        display: block;
+        margin: 0 auto;
+        box-sizing: border-box;
+        border: 1px solid #333;
+        image-rendering: crisp-edges;
+      }
+      div {
+        text-align: center;
+      }
+    </style>
+    <script src="fontmap.js"></script>
+    <script>
+      'use strict'
+
+      const CANVAS_WIDTH = 640
+      const CANVAS_HEIGHT = 480
+      const PADDING = 10
+
+      const FONT_WIDTH = 8
+      const FONT_HEIGHT = 16
+
+      let canvas
+      let ctx
+
+      function init () {
+        canvas = document.getElementById('canvas')
+        ctx = canvas.getContext('2d')
+        canvas.width = CANVAS_WIDTH
+        canvas.height = CANVAS_HEIGHT
+        window.addEventListener('resize', resize)
+        resize()
+        ctx.fillStyle = '#000'
+        ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
+        ctx.fillStyle = '#0f0'
+        let lines = [
+          '\0☺☻♥♦♣♠•◘○◙♂♀♪♫☼►◄↕‼¶§▬↨↑↓→←∟↔▲▼ !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNO',
+          'PQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~⌂ÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜ¢£¥₧ƒ',
+          'áíóúñÑªº¿⌐¬½¼¡«»░▒▓│┤╡╢╖╕╣║╗╝╜╛┐└┴┬├─┼╞╟╚╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┘┌█▄▌▐▀αßΓπΣσµτΦΘΩδ∞φε∩',
+          '≡±≥≤⌠⌡÷≈°∙·√ⁿ²■\xa0'
+        ]
+        drawLines(lines, 0, 0, 1)
+        lines = [
+          '\0☺☻♥♦♣♠•◘○◙♂♀♪♫☼►◄↕‼¶§▬↨↑↓→←∟↔▲▼ !"#$%&\'',
+          '()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNO',
+          'PQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvw',
+          'xyz{|}~⌂ÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜ¢£¥₧ƒ',
+          'áíóúñÑªº¿⌐¬½¼¡«»░▒▓│┤╡╢╖╕╣║╗╝╜╛┐└┴┬├─┼╞╟',
+          '╚╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┘┌█▄▌▐▀αßΓπΣσµτΦΘΩδ∞φε∩',
+          '≡±≥≤⌠⌡÷≈°∙·√ⁿ²■\xa0'
+        ]
+        drawLines(lines, 0, 80, 2)
+      }
+
+      function resize () {
+        document.body.style.padding = PADDING + 'px'
+        const availableHeight = window.innerHeight - 2 * PADDING
+        const availableWidth = window.innerWidth - 2 * PADDING
+        const scaledCanvasHeight = Math.min(availableHeight, availableWidth * 3 / 4)
+        const scaledCanvasWidth = scaledCanvasHeight * 4 / 3
+        canvas.style.width = scaledCanvasWidth + 'px'
+        canvas.style.height = scaledCanvasHeight + 'px'
+      }
+
+      function drawChar (c, x, y, s) {
+        const bitmap = PC_FACE_MAP[c]
+        for (let i = 0; i < bitmap.length; i++) {
+          for (let j = 0; j < 8; j++) {
+            const mask = 1 << (7 - j)
+            if ((bitmap[i] & mask) !== 0) {
+              ctx.fillRect(x + s * j, y + s * i, s, s)
+            }
+          }
+        }
+      }
+
+      function drawLine (line, x, y, s) {
+        for (let i = 0; i < line.length; i++) {
+          drawChar(line.charAt(i), x + i * s * FONT_WIDTH, y, s)
+        }
+      }
+
+      function drawLines (lines, x, y, s) {
+        for (let i = 0; i < lines.length; i++) {
+          drawLine(lines[i], x, y + i * s * FONT_HEIGHT, s)
+        }
+      }
+
+      window.addEventListener('load', init)
+    </script>
+  </head>
+  <body>
+    <canvas id="canvas">
+    </canvas>
+  </body>
+</html>
