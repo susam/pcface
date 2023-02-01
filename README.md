@@ -144,11 +144,11 @@ This font is based on the [IBM VGA 8x16][VGA] and [Verite
 8x16][VERITE] OEM fonts. Some glyphs in this font look exactly like
 the glyphs of IBM VGA 8x16 while some others look exactly like the
 glyphs of Verite 8x16. However, there are also several glyphs in this
-font match neither of the two OEM fonts. Instead they happen to be
-adaptations of the glyphs found in one or both of the OEM fonts.
+font that match neither of the two OEM fonts. Instead they happen to
+be adaptations of the glyphs found in one or both of the OEM fonts.
 
-I feel that Jayvee Enaguas has done an outstanding job of picking the
-best parts from both OEM fonts (IBM VGA 8x16 and Verite 8x16) and
+In my opinion, Jayvee Enaguas has done an outstanding job of picking
+the best parts from both OEM fonts (IBM VGA 8x16 and Verite 8x16) and
 fused them together to create this font (Modern DOS 8x16). I like that
 this font has the slashed zero of Verite. I also like the more
 squarish outline of the letters in Verite that has been inherited into

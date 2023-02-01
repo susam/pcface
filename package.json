@@ -1,6 +1,6 @@
 {
   "name": "pcface",
-  "version": "0.1.0",
+  "version": "0.2.0-dev",
   "description": "Bitmap arrays for CP437 glyphs",
   "main": "fontlist.js",
   "files": [
