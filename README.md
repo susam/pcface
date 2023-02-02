@@ -7,7 +7,7 @@ PC Face is a collection of programmer-friendly resources to draw
 ![CP437 characters rendered on an HTML5 canvas][CP437IMG]
 
 [CP437WIKI]: https://en.wikipedia.org/wiki/Code_page_437
-[CP437IMG]: https://i.imgur.com/uG0T2Ju.png
+[CP437IMG]: https://susam.github.io/blob/img/pcface/pcface-0.2.0.png
 
 
 Contents
