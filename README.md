@@ -29,17 +29,17 @@ Resources
 There are a number of files available in this project. Here is a brief
 description of some of the files:
 
-- [fontlist.js](fontlist.js): Bitmap representation of all CP437
-  glyphs as a JavaScript array.
-- [fontmap.js](fontmap.js): Bitmap representation of all CP437 glyphs
-  as a JavaScript object that maps Unicode characters that approximate
-  the glyphs to their bitmaps.
-- [glyph.txt](glyph.txt): All CP437 glyphs represented using
+- [out/fontlist.js](out/fontlist.js): Bitmap representation of all
+  CP437 glyphs as a JavaScript array.
+- [out/fontmap.js](out/fontmap.js): Bitmap representation of all CP437
+  glyphs as a JavaScript object that maps Unicode characters that
+  approximate the glyphs to their bitmaps.
+- [out/glyph.txt](out/glyph.txt): All CP437 glyphs represented using
   asterisks.
-- [graph.txt](graph.txt): All CP437 glyphs represented using the at
-  symbol and dots. Each row of the glyph is prefixed with the binary
-  code of the row represented in hexadecimal. The same binary codes
-  appear in the JavaScript files mentioned above.
+- [out/graph.txt](out/graph.txt): All CP437 glyphs represented using
+  the at symbol and dots. Each row of the glyph is prefixed with the
+  binary code of the row represented in hexadecimal. The same binary
+  codes appear in the JavaScript files mentioned above.
 
 You are free to use these resources or any file available in this
 project under the terms of the MIT license. Perhaps you are making a
@@ -53,18 +53,19 @@ about this.
 
 The bitmap array files are also available at the following CDN URLs:
 
-- https://cdn.jsdelivr.net/npm/pcface/fontlist.js
-- https://cdn.jsdelivr.net/npm/pcface/fontmap.js
+- https://cdn.jsdelivr.net/npm/pcface/out/fontlist.js
+- https://cdn.jsdelivr.net/npm/pcface/out/fontmap.js
 
 
 Bitmap Format
 -------------
 
-The format of the bitmaps available in [fontlist.js](fontlist.js) and
-[fontmap.js](fontmap.js) is quite simple. Each glyph is represented
-with a 8x16 grid of pixels, i.e., 16 rows of pixels with 8 columns in
-each column. The 16 rows are represented as 16 integers in the bitmap
-(a list of integers) for each glyph. For example:
+The format of the bitmaps available in
+[out/fontlist.js](out/fontlist.js) and
+[out/fontmap.js](out/fontmap.js) is quite simple. Each glyph is
+represented with a 8x16 grid of pixels, i.e., 16 rows of pixels with 8
+columns in each column. The 16 rows are represented as 16 integers in
+the bitmap (a list of integers) for each glyph. For example:
 
 ```javascript
   [
@@ -118,13 +119,13 @@ Here is the output:
 
 If you need more help with writing the code to translate the bitmaps
 to pixels, refer to the `drawChar()` function in
-[fontlist.html](fontlist.html) or [fontmap.html](fontmap.html) to see
-an example of how you can read the bitmap and plot the bitmap on a
-canvas. You may also refer to the `drawLine()` function to draw a line
-of text or the `drawLines()` function to draw multiple lines of text.
-It should be possible to refer to these functions and write similar
-code for the programming language and graphical toolkit of your
-choice.
+[src/fontlist.html](src/fontlist.html) or
+[src/fontmap.html](src/fontmap.html) to see an example of how you can
+read the bitmap and plot the bitmap on a canvas. You may also refer to
+the `drawLine()` function to draw a line of text or the `drawLines()`
+function to draw multiple lines of text. It should be possible to
+refer to these functions and write similar code for the programming
+language and graphical toolkit of your choice.
 
 
 Font Details
@@ -132,8 +133,8 @@ Font Details
 
 The font used in this project is [Modern DOS 8x16][MDOS] version
 20190101.02. This font was developed by Jayvee Enaguas and it is
-available under the terms of [CC0 1.0 Universal (CC0 1.0) Public
-Domain Dedication][CC0]. A copy of the font is also archived in the
+available under the terms of [CC0 1.0 Universal Public Domain
+Dedication][CC0]. A copy of the font is also archived in the
 [src/modern-dos/](src/modern-dos/) directory of this project. A
 preview of this font is available here:
 
@@ -223,6 +224,6 @@ about this project.
 More
 ----
 
-See [Andromeda Invaders](https://github.com/susam/invaders) where the
-bitmaps available in this project have been used to render text on a
-game canvas.
+See [Andromeda Invaders](https://github.com/susam/invaders) where a
+small subset of the bitmaps available in this project has been used to
+render text on a game canvas.
