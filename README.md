@@ -164,7 +164,7 @@ top-level directory of this project:
 
 ```sh
 make venv
-venv/bin/python3 PATH_TO_TTF_FILE
+venv/bin/python3 src/bitmap.py PATH_TO_TTF_FILE
 ```
 
 [MDOS]: https://www.dafont.com/modern-dos.font
