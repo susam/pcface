@@ -7,7 +7,6 @@
       body {
         background: #111;
         margin: 0;
-        padding: 10px;
       }
       canvas {
         background: #000;
@@ -21,12 +20,13 @@
         text-align: center;
       }
     </style>
-    <script src="../fontlist.js"></script>
+    <script src="../out/fontlist.js"></script>
     <script>
       'use strict'
 
       const CANVAS_WIDTH = 640
-      const CANVAS_HEIGHT = 224
+      const CANVAS_HEIGHT = 480
+      const PADDING = 10
 
       const FONT_WIDTH = 8
       const FONT_HEIGHT = 16
@@ -39,14 +39,31 @@
         ctx = canvas.getContext('2d')
         canvas.width = CANVAS_WIDTH
         canvas.height = CANVAS_HEIGHT
+        window.addEventListener('resize', resize)
+        resize()
         ctx.fillStyle = '#000'
         ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
-        ctx.fillStyle = '#0f0';
+        ctx.fillStyle = '#0f0'
         let lines = [
+          range(0, 80), range(80, 160), range(160, 240), range(240, 256)
+        ]
+        drawLines(lines, 0, 0, 1)
+
+        lines = [
           range(0, 40), range(40, 80), range(80, 120), range(120, 160),
           range(160, 200), range(200, 240), range(240, 256)
         ]
-        drawLines(lines, 0, 0, 2)
+        drawLines(lines, 0, 80, 2)
+      }
+
+      function resize () {
+        document.body.style.padding = PADDING + 'px'
+        const availableHeight = window.innerHeight - 2 * PADDING
+        const availableWidth = window.innerWidth - 2 * PADDING
+        const scaledCanvasHeight = Math.min(availableHeight, availableWidth * 3 / 4)
+        const scaledCanvasWidth = scaledCanvasHeight * 4 / 3
+        canvas.style.width = scaledCanvasWidth + 'px'
+        canvas.style.height = scaledCanvasHeight + 'px'
       }
 
       function range (start, stop) {

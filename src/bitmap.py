@@ -67,10 +67,10 @@ def main():
     chars = open('src/cp437.txt').read()[:256]
     bitmaps = make_bitmaps(chars, sys.argv[1])
     bitmaps[0] = bitmaps[32]  # Use a blank bitmap for null character.
-    open('glyph.txt', 'w').write(make_graphs(chars, bitmaps))
-    open('graph.txt', 'w').write(make_verbose_graphs(chars, bitmaps))
-    open('fontlist.js', 'w').write(make_font_list(chars, bitmaps))
-    open('fontmap.js', 'w').write(make_font_map(chars, bitmaps))
+    open('out/glyph.txt', 'w').write(make_graphs(chars, bitmaps))
+    open('out/graph.txt', 'w').write(make_verbose_graphs(chars, bitmaps))
+    open('out/fontlist.js', 'w').write(make_font_list(chars, bitmaps))
+    open('out/fontmap.js', 'w').write(make_font_map(chars, bitmaps))
 
 
 if __name__ == '__main__':

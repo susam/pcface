@@ -137,8 +137,8 @@ Domain Dedication][CC0]. A copy of the font is also archived in the
 [src/modern-dos/](src/modern-dos/) directory of this project. A
 preview of this font is available here:
 
-- [meta/preview-8x16.png](meta/preview-8x16.png)
-- [meta/preview-16x32.png](meta/preview-16x32.png)
+- [out/preview-8x16.png](out/preview-8x16.png)
+- [out/preview-16x32.png](out/preview-16x32.png)
 
 This font is based on the [IBM VGA 8x16][VGA] and [Verite
 8x16][VERITE] OEM fonts. Some glyphs in this font look exactly like

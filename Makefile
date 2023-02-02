@@ -7,14 +7,14 @@ checks:
 	npm pack
 	tar -tvf pcface*.tgz
 
-preview:
+preview-all:
 	venv/bin/python3 src/preview.py
-	xdg-open meta/preview-8x16.png || open meta/preview-8x16.png
-	xdg-open meta/preview-16x32.png || open meta/preview-16x32.png
+	xdg-open out/preview-8x16.png || open out/preview-8x16.png
+	xdg-open out/preview-16x32.png || open out/preview-16x32.png
 
 preview-char:
 	venv/bin/python3 src/preview-char.py
-	xdg-open /tmp/preview.png || open /tmp/preview.png
+	xdg-open out/preview-B.png || open out/preview-B.png
 
 lines:
 	python3 lines.py

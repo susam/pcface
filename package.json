@@ -4,10 +4,10 @@
   "description": "Bitmap arrays for CP437 glyphs",
   "main": "fontlist.js",
   "files": [
-    "fontlist.js",
-    "fontmap.js",
-    "fontlist.html",
-    "fontmap.html"
+    "out/fontlist.js",
+    "out/fontmap.js",
+    "src/fontlist.html",
+    "src/fontmap.html"
   ],
   "keywords": [
     "dos",
@@ -27,7 +27,7 @@
     "eslint-plugin-html": "latest"
   },
   "scripts": {
-    "lint": "standard --plugin html *.html"
+    "lint": "standard --plugin html src/*.html"
   },
   "standard": {
     "global": [
