@@ -1,3 +1,4 @@
 node_modules/
 venv/
 package-lock.json
+pcface*.tgz

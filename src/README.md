@@ -27,9 +27,9 @@ Perform the following tasks for every release:
   - Update version in package.json.
   - Update copyright notice in LICENSE.md
   - Update CHANGES.md
-  - Run linter:
+  - Run checks:
   
-        make lint
+        make checks
 
   - Optional: Update screenshot of `meta/demo.html` in README.
   - Commit changes:

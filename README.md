@@ -130,7 +130,7 @@ choice.
 Font Details
 ------------
 
-The font used in this project is [*Modern DOS 8x16*][MDOS] version
+The font used in this project is [Modern DOS 8x16][MDOS] version
 20190101.02. This font was developed by Jayvee Enaguas and it is
 available under the terms of [CC0 1.0 Universal (CC0 1.0) Public
 Domain Dedication][CC0]. A copy of the font is also archived in the

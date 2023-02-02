@@ -1,8 +1,11 @@
 bitmap:
 	venv/bin/python3 src/bitmap.py src/modern-dos/ModernDOS8x16.ttf
 
-lint:
+checks:
 	npm run lint
+	rm -f pcface*.tgz
+	npm pack
+	tar -tvf pcface*.tgz
 
 preview:
 	venv/bin/python3 src/preview.py
