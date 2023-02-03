@@ -1,0 +1,33 @@
+[project]
+name = "pcface"
+version = "0.2.0"
+description = "PC Face - Bitmap arrays for all 256 glyphs of CP437"
+readme = "README.md"
+license = {text = "MIT"}
+keywords = ["font", "cp437", "retro"]
+authors = [{name = "Susam Pal"}]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Environment :: Console",
+  "Intended Audience :: End Users/Desktop",
+  "Intended Audience :: System Administrators",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: JavaScript",
+  "Programming Language :: Python :: 3",
+  "Topic :: Artistic Software",
+  "Topic :: Multimedia :: Graphics",
+  "Topic :: Multimedia :: Graphics :: Graphics Conversion",
+  "Topic :: Text Processing :: Fonts",
+  "Topic :: Utilities"
+]
+
+[project.urls]
+homepage = "https://github.com/susam/pcface"
+
+[project.scripts]
+pcface = "pcface:main"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"

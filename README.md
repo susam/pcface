@@ -1,8 +1,12 @@
 PC Face
 =======
 
-PC Face is a collection of programmer-friendly resources to draw
-[CP437][CP437WIKI] characters on a graphical canvas.
+PC Face is a collection of programmer-friendly resources that are
+useful to draw [CP437][CP437WIKI] characters on a graphical canvas.
+This project provides bitmap arrays of all 256 glyphs from the CP437
+character set rendered using a font inspired by IBM PC OEM fonts.
+Additionally, this project includes a script that can be useful to
+generate similar bitmap arrays using other fonts.
 
 ![CP437 characters rendered on an HTML5 canvas][CP437IMG]
 
@@ -41,20 +45,19 @@ description of some of the files:
   binary code of the row represented in hexadecimal. The same binary
   codes appear in the JavaScript files mentioned above.
 
-You are free to use these resources or any file available in this
-project under the terms of the MIT license. Perhaps you are making a
-retro-style game from first principles where you decide what each
-pixel should be. Perhaps you are making an ASCII banner to display
-CP437 using asterisks or some familiar ASCII character. No matter what
-you want to do with the resource files mentioned above, you would
-probably have to write some code to translate the bitmap of a
-character to pixels on screen. The next section provides more details
-about this.
-
 The bitmap array files are also available at the following CDN URLs:
 
 - https://cdn.jsdelivr.net/npm/pcface/out/fontlist.js
 - https://cdn.jsdelivr.net/npm/pcface/out/fontmap.js
+
+You are free to use these resources or any file available in this
+project under the terms of the MIT license. Perhaps you are making a
+retro-style game from first principles where you decide what each
+pixel should be. Perhaps you want to render CP437 glyphs using
+asterisks to make a text banner. The resource files available in this
+project might turn out to be useful for such activities if you are
+ready to write some code to translate the available bitmaps to pixels
+on screen.
 
 
 Bitmap Format
@@ -65,7 +68,8 @@ The format of the bitmaps available in
 [out/fontmap.js](out/fontmap.js) is quite simple. Each glyph is
 represented with a 8x16 grid of pixels, i.e., 16 rows of pixels with 8
 columns in each column. The 16 rows are represented as 16 integers in
-the bitmap (a list of integers) for each glyph. For example:
+the bitmap (a list of integers) for each glyph. For example, the glyph
+for the uppercase letter 'B' is represented as:
 
 ```javascript
   [
@@ -75,11 +79,11 @@ the bitmap (a list of integers) for each glyph. For example:
 ```
 
 Each integer represents the dots that must be plotted for every row of
-the glyph. For example, `0x00` and `0x00` above means that the top two
-rows are blank. Then `0xfc` (binary `1111100`) means that the first 6
-pixels of the third row are plotted with the font colour and the last
-two pixels are blank. In this manner, 16 rows of pixels must be
-plotted.
+the glyph. The integers `0x00` and `0x00` at the beginning means that
+the top two rows of the glyph are blank. Then `0xfc` (binary
+`1111100`) means that the first 6 pixels of the third row are plotted
+with the font colour and the last two pixels are left blank. In this
+manner, 16 rows of pixels must be plotted.
 
 Here is an example Python code that reads these bitmaps and plots the
 glyph on standard output using a dot (`.`) for every `0` bit and the
@@ -132,7 +136,7 @@ Font Details
 ------------
 
 The font used in this project is [Modern DOS 8x16][MDOS] version
-20190101.02. This font was developed by Jayvee Enaguas and it is
+20190101.02 developed by Jayvee Enaguas. Jayvee has made this font
 available under the terms of [CC0 1.0 Universal Public Domain
 Dedication][CC0]. A copy of the font is also archived in the
 [src/modern-dos/](src/modern-dos/) directory of this project. A
@@ -165,7 +169,7 @@ top-level directory of this project:
 
 ```sh
 make venv
-venv/bin/python3 src/bitmap.py PATH_TO_TTF_FILE
+venv/bin/python3 src/pcface.py PATH_TO_TTF_FILE
 ```
 
 [MDOS]: https://www.dafont.com/modern-dos.font

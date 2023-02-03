@@ -1,4 +1,6 @@
 node_modules/
 venv/
+dist/
+src/pcface.egg-info/
 package-lock.json
 pcface*.tgz

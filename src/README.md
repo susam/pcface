@@ -48,6 +48,9 @@ Perform the following tasks for every release:
 
         npm login
         npm publish
+        make dist
+        make test-upload
+        make upload
         
 
 Post-Release Checklist
