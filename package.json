@@ -1,13 +1,11 @@
 {
   "name": "pcface",
-  "version": "0.2.0",
+  "version": "0.3.0-dev",
   "description": "PC Face - Bitmap arrays for all 256 glyphs of CP437",
-  "main": "fontlist.js",
   "files": [
-    "out/fontlist.js",
-    "out/fontmap.js",
-    "src/fontlist.html",
-    "src/fontmap.html"
+    "src/*.html",
+    "src/*.js",
+    "out/**/*.js"
   ],
   "keywords": [
     "dos",
@@ -24,15 +22,20 @@
   "repository": "github:susam/pcface",
   "devDependencies": {
     "standard": "latest",
-    "eslint-plugin-html": "latest"
+    "mocha": "latest",
+    "eslint-plugin-html": "latest",
+    "jsdoc": "latest"
   },
   "scripts": {
-    "lint": "standard --plugin html src/*.html"
+    "test": "mocha src/test/",
+    "lint": "standard --plugin html src/*.html src/*.js",
+    "doc": "jsdoc -c src/jsdoc.json"
   },
   "standard": {
     "global": [
-      "PC_FACE_LIST",
-      "PC_FACE_MAP"
+      "pcface",
+      "PC_FACE_MODERN_DOS_8X16_FONT_LIST",
+      "PC_FACE_MODERN_DOS_8X16_FONT_MAP"
     ]
   }
 }

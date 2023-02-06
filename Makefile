@@ -1,26 +1,59 @@
 # Development Targets
 # -------------------
 
-venv:
-	python3 -m venv venv/
-	venv/bin/pip3 install pillow
-	venv/bin/pip3 install pylint pycodestyle pydocstyle pyflakes isort
-	venv/bin/pip3 install build twine
-
 pcface:
-	venv/bin/python3 src/pcface.py src/modern-dos/ModernDOS8x16.ttf
+	venv/bin/python3 src/pcface.py src/font/moderndos/ModernDOS8x16.ttf out/moderndos-8x16/
+
+deps:
+	python3 -m venv venv/
+	venv/bin/pip3 install -r src/requirements.txt -r src/dev-requirements.txt
+	npm install
+
+rmdeps:
+	rm -rf node_modules/ venv/
+
+cp437:
+	python3 src/pcface.py --cp437 > out.txt
+	diff out.txt src/cp437.txt
+	rm out.txt
 
 lint:
-	npm run lint
 	! venv/bin/isort --quiet --diff . | grep .
 	venv/bin/pycodestyle src/
+	venv/bin/pydocstyle src/
 	venv/bin/pyflakes src/
-	venv/bin/pylint -d C0114,C0116 src/
+	venv/bin/pylint src/
+	npm run lint
 
-checks: lint
+test:
+	venv/bin/python3 -m unittest discover -v -t src -s src.test
+	npm test
+
+checks: cp437 lint test
 	rm -f pcface*.tgz
 	npm pack
 	tar -tvf pcface*.tgz
+
+doc: pydoc jsdoc
+
+rmdoc:
+	rm -rf doc
+
+pydoc: rmdoc
+	venv/bin/sphinx-quickstart -q -p "PC Face" -a "Susam Pal" doc/py
+	venv/bin/sphinx-apidoc -o doc/py/api src
+	echo "extensions.append('sphinx.ext.napoleon')" >> doc/py/conf.py
+	echo "extensions.append('sphinx.ext.intersphinx')" >> doc/py/conf.py
+	echo >> doc/py/index.rst
+	echo 'API' >> doc/py/index.rst
+	echo '---' >> doc/py/index.rst
+	echo '.. toctree::' >> doc/py/index.rst
+	echo '   api/modules' >> doc/py/index.rst
+	PYTHONPATH=src venv/bin/sphinx-build -b html doc/py doc/py/html
+	echo 'Documentation available at doc/py/html/index.html'
+
+jsdoc: rmdoc
+	npm run doc
 
 clean:
 	rm -rf *.pyc __pycache__
@@ -54,11 +87,16 @@ upload:
 
 
 
-# Project Setup
-# -------------
+# Font Downloads
+# --------------
 
-download-font:
-	mkdir -p src/modern-dos/
-	cd src/modern-dos/ && curl -OJ 'https://dl.dafont.com/dl/?f=modern_dos'
-	cd src/modern-dos/ && unzip modern_dos.zip
-	rm src/modern-dos/modern_dos.zip
+download-fonts: download-modern-dos
+
+download-modern-dos:
+	rm -rf moderndos.zip src/font/moderndos/
+	curl -o moderndos.zip 'https://dl.dafont.com/dl/?f=modern_dos'
+	mkdir -p src/font/moderndos/
+	cd src/font/moderndos/ && unzip ../../../moderndos.zip
+	rm moderndos.zip
+
+FORCE:

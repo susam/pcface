@@ -1,6 +1,6 @@
 [project]
 name = "pcface"
-version = "0.2.0"
+version = "0.3.0-dev"
 description = "PC Face - Bitmap arrays for all 256 glyphs of CP437"
 readme = "README.md"
 license = {text = "MIT"}
@@ -20,6 +20,9 @@ classifiers = [
   "Topic :: Multimedia :: Graphics :: Graphics Conversion",
   "Topic :: Text Processing :: Fonts",
   "Topic :: Utilities"
+]
+dependencies = [
+  "pillow"
 ]
 
 [project.urls]

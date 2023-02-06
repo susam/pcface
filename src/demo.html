@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>PC Face List</title>
+    <title>PC Face Demo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <style>
       body {
         background: #111;
         margin: 0;
-        padding: 10px;
       }
       canvas {
         background: #000;
@@ -15,70 +14,117 @@
         margin: 0 auto;
         box-sizing: border-box;
         border: 1px solid #333;
-        image-rendering: crisp-edges;
+        image-rendering: pixelated;
       }
-      div {
-        text-align: center;
+      select {
+        background: #000;
+        color: #bbb;
+        border: 1px solid #333;
+        margin: 0 auto;
+        box-sizing: border-box;
+        display: block;
       }
     </style>
-    <script src="../out/fontlist.js"></script>
+    <script src="../out/modern-dos-8x16/fontlist.js"></script>
+    <script src="../out/modern-dos-8x16/fontmap.js"></script>
+    <script src="pcface.js"></script>
     <script>
       'use strict'
 
       const CANVAS_WIDTH = 640
-      const CANVAS_HEIGHT = 224
-
-      const FONT_WIDTH = 8
-      const FONT_HEIGHT = 16
+      const CANVAS_HEIGHT = 480
+      const SELECT_HEIGHT = 30
+      const PADDING = 10
+      const DEMO = {
+        'modern-dos-8x16-font-list': PC_FACE_MODERN_DOS_8X16_FONT_LIST,
+        'modern-dos-8x16-font-map': PC_FACE_MODERN_DOS_8X16_FONT_MAP
+      }
 
       let canvas
+      let select
       let ctx
 
       function init () {
         canvas = document.getElementById('canvas')
+        select = document.getElementById('select')
         ctx = canvas.getContext('2d')
         canvas.width = CANVAS_WIDTH
         canvas.height = CANVAS_HEIGHT
-        ctx.fillStyle = '#022'
+        select.style.marginTop = PADDING + 'px'
+        select.style.marginBottom = PADDING + 'px'
+        select.style.height = SELECT_HEIGHT + 'px'
+        for (const key in DEMO) {
+          const option = document.createElement('option')
+          option.value = key
+          option.innerHTML = key
+          select.appendChild(option)
+        }
+        ctx.fillStyle = '#000'
         ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
-        ctx.fillStyle = '#6f6'
-        const lines = [
-          range(0, 40), range(40, 80), range(80, 120), range(120, 160),
-          range(160, 200), range(200, 240), range(240, 256)
+        resizeCanvas()
+        setHash()
+        setDemo()
+        window.addEventListener('resize', resizeCanvas)
+        window.addEventListener('hashchange', setDemo)
+        select.addEventListener('change', setHash)
+      }
+
+      function fontListDemo (fontList, fontWidth, fontHeight) {
+        ctx.fillStyle = '#3f3'
+        const ss1 = pcface.ranges(0, 256, 80)
+        const ss2 = pcface.ranges(0, 256, 40)
+        pcface.drawStrings(fontList, ctx, fontWidth, fontHeight,
+          ss1, 0, 0, 1)
+        pcface.drawStrings(fontList, ctx, fontWidth, fontHeight,
+          ss2, 0, 5 * fontHeight, 2)
+      }
+
+      function fontMapDemo (fontMap, fontWidth, fontHeight) {
+        ctx.fillStyle = '#fc0'
+        const ss1 = [
+          '\0☺☻♥♦♣♠•◘○◙♂♀♪♫☼►◄↕‼¶§▬↨↑↓→←∟↔▲▼ !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNO',
+          'PQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~⌂ÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜ¢£¥₧ƒ',
+          'áíóúñÑªº¿⌐¬½¼¡«»░▒▓│┤╡╢╖╕╣║╗╝╜╛┐└┴┬├─┼╞╟╚╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┘┌█▄▌▐▀αßΓπΣσµτΦΘΩδ∞φε∩',
+          '≡±≥≤⌠⌡÷≈°∙·√ⁿ²■\xa0'
         ]
-        drawLines(lines, 0, 0, 2)
+        const ss2 = [
+          '\0☺☻♥♦♣♠•◘○◙♂♀♪♫☼►◄↕‼¶§▬↨↑↓→←∟↔▲▼ !"#$%&\'',
+          '()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNO',
+          'PQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvw',
+          'xyz{|}~⌂ÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜ¢£¥₧ƒ',
+          'áíóúñÑªº¿⌐¬½¼¡«»░▒▓│┤╡╢╖╕╣║╗╝╜╛┐└┴┬├─┼╞╟',
+          '╚╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┘┌█▄▌▐▀αßΓπΣσµτΦΘΩδ∞φε∩',
+          '≡±≥≤⌠⌡÷≈°∙·√ⁿ²■\xa0'
+        ]
+        pcface.drawStrings(fontMap, ctx, fontWidth, fontHeight,
+          ss1, 0, 0, 1)
+        pcface.drawStrings(fontMap, ctx, fontWidth, fontHeight,
+          ss2, 0, 5 * fontHeight, 2)
       }
 
-      function range (start, stop) {
-        const result = []
-        for (let i = start; i < stop; i++) {
-          result.push(i)
-        }
-        return result
+      function resizeCanvas () {
+        document.body.style.padding = PADDING + 'px'
+        const availableHeight = window.innerHeight - 3 * PADDING - SELECT_HEIGHT
+        const availableWidth = window.innerWidth - 2 * PADDING
+        const scaledCanvasHeight = Math.min(availableHeight, availableWidth * 3 / 4)
+        const scaledCanvasWidth = scaledCanvasHeight * 4 / 3
+        canvas.style.width = scaledCanvasWidth + 'px'
+        canvas.style.height = scaledCanvasHeight + 'px'
       }
 
-      function drawChar (c, x, y, s) {
-        const bitmap = PC_FACE_LIST[c]
-        for (let i = 0; i < bitmap.length; i++) {
-          for (let j = 0; j < 8; j++) {
-            const mask = 1 << (7 - j)
-            if ((bitmap[i] & mask) !== 0) {
-              ctx.fillRect(x + s * j, y + s * i, s, s)
-            }
-          }
-        }
+      function setHash () {
+        window.location.hash = '#' + select.value
       }
 
-      function drawLine (line, x, y, s) {
-        for (let i = 0; i < line.length; i++) {
-          drawChar(line[i], x + i * s * FONT_WIDTH, y, s)
-        }
-      }
-
-      function drawLines (lines, x, y, s) {
-        for (let i = 0; i < lines.length; i++) {
-          drawLine(lines[i], x, y + i * s * FONT_HEIGHT, s)
-        }
+      function setDemo () {
+        const name = window.location.hash.substring(1)
+        const bitmaps = DEMO[name]
+        const match = name.match(/^.*-(\d+)x(\d+)-font-(.*)$/)
+        const fontWidth = match[1]
+        const fontHeight = match[2]
+        const bitmapType = match[3]
+        const demoFunction = bitmapType === 'list' ? fontListDemo : fontMapDemo
+        demoFunction(bitmaps, fontWidth, fontHeight)
       }
 
       window.addEventListener('load', init)
@@ -87,5 +133,7 @@
   <body>
     <canvas id="canvas">
     </canvas>
+    <select id="select">
+    </select>
   </body>
 </html>

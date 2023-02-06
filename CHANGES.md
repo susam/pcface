@@ -1,6 +1,15 @@
 Changelog
 =========
 
+0.3.0 (UNRELEASED)
+------------------
+
+### Added
+
+- Expose JavaScript functions to draw glyphs on HTML5 canvas.
+- Expose Python functions to create glyph resources.
+
+
 0.2.0 (2023-02-03)
 ------------------
 

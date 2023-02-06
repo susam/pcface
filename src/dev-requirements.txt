@@ -1,0 +1,8 @@
+pylint
+pycodestyle
+pydocstyle
+pyflakes
+isort
+sphinx
+build
+twine

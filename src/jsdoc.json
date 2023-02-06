@@ -1,0 +1,12 @@
+{
+  "source": {
+    "include": "src/"
+  },
+  "opts": {
+    "destination": "doc/js/",
+    "readme": "README.md"
+  },
+  "plugins": [
+    "plugins/markdown"
+  ]
+}
