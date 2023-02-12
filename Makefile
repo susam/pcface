@@ -50,20 +50,21 @@ rmdoc:
 	rm -rf doc
 
 pydoc: rmdoc
-	venv/bin/sphinx-quickstart -q -p "PC Face" -a "Susam Pal" doc/py
-	venv/bin/sphinx-apidoc -o doc/py/api src
-	echo "extensions.append('sphinx.ext.napoleon')" >> doc/py/conf.py
-	echo "extensions.append('sphinx.ext.intersphinx')" >> doc/py/conf.py
-	echo >> doc/py/index.rst
-	echo 'API' >> doc/py/index.rst
-	echo '---' >> doc/py/index.rst
-	echo '.. toctree::' >> doc/py/index.rst
-	echo '   api/modules' >> doc/py/index.rst
-	PYTHONPATH=src venv/bin/sphinx-build -b html doc/py doc/py/html
-	echo 'Documentation available at doc/py/html/index.html'
+	venv/bin/sphinx-quickstart -q -p "PC Face" -a "Susam Pal" doc/sphinx
+	venv/bin/sphinx-apidoc -o doc/sphinx/api src
+	echo "extensions.append('sphinx.ext.napoleon')" >> doc/sphinx/conf.py
+	echo "extensions.append('sphinx.ext.intersphinx')" >> doc/sphinx/conf.py
+	echo >> doc/sphinx/index.rst
+	echo 'API' >> doc/sphinx/index.rst
+	echo '---' >> doc/sphinx/index.rst
+	echo '.. toctree::' >> doc/sphinx/index.rst
+	echo '   api/modules' >> doc/sphinx/index.rst
+	PYTHONPATH=src venv/bin/sphinx-build -b html doc/sphinx/ doc/py/
+	echo 'Documentation available at doc/py/index.html'
 
 jsdoc: rmdoc
 	npm run doc
+	echo 'Documentation available at doc/js/index.html'
 
 clean:
 	rm -rf *.pyc __pycache__
