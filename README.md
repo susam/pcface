@@ -68,7 +68,7 @@ resource files in each directory.
   object that maps each CP437 character to its bitmap array.
 - [out/moderndos-8x16/glyph.txt][]: All CP437 glyphs represented using
   asterisks.
-- [out/moderdns-8x16/graph.txt][]: All CP437 glyphs represented using
+- [out/moderndos-8x16/graph.txt][]: All CP437 glyphs represented using
   the at symbol (`@`) and dots (`.`). Each row of the glyph is
   prefixed with the binary code of the row represented in hexadecimal.
   The same binary codes appear as comments in the JavaScript files
