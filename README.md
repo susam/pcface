@@ -4,31 +4,43 @@ PC Face
 PC Face is a collection of programmer-friendly resources that allow
 drawing [CP437][CP437WIKI] characters on a graphical canvas. This
 project provides bitmap arrays for all 256 glyphs from the CP437
-character set rendered using various IBM PC OEM fonts. Additionally,
-this project includes a [Python script][PY] to generate these bitmaps.
-This script could be useful for generating similar bitmaps for other
-fonts not included in this project. This project also provides a set
-of [JavaScript functions][JS] that may be used to render the bitmaps
-on an HTML5 canvas. This set of functions serve as a reference of how
-these bitmaps could be used to render CP437 glyphs in other graphical
-environments.
+character set rendered using various free fonts that reproduce the
+original IBM PC OEM fonts.
 
 ![CP437 characters rendered on an HTML5 canvas][CP437IMG]
+
+Additionally, this project includes a [Python script][PY] to generate
+these bitmaps. This script could be useful for generating similar
+bitmaps for other fonts not included in this project. This project
+also provides a set of [JavaScript functions][JS] that may be used to
+render the bitmaps on an HTML5 canvas. This set of functions serve as
+a reference for how these bitmaps could be used to render CP437 glyphs
+in other graphical environments. More about this is discussed in the
+sections below.
+
+Visit [susam.github.io/pcface/demo][DEMO] to see a demo.
 
 [CP437WIKI]: https://en.wikipedia.org/wiki/Code_page_437
 [CP437IMG]: https://susam.github.io/blob/img/pcface/pcface-0.2.0.png
 [PY]: src/pcface.py
 [JS]: src/pcface.js
+[DEMO]: https://susam.github.io/pcface/demo/
 
 
 Contents
 --------
 
 * [Resources](#resources)
+* [Demo](#demo)
 * [Bitmap Format](#bitmap-format)
 * [Font Details](#font-details)
+  * [Modern DOS Font](#modern-dos-font)
+  * [Oldschool PC Fonts](#oldschool-pc-fonts)
 * [API Documentation](#api-documentation)
-* [Credit](#credit)
+* [API Usage](#api-usage)
+  * [Python API](#python-api)
+  * [Python Tool](#python-tool)
+  * [JavaScript API](#javascript-api)
 * [License](#license)
 * [Support](#support)
 * [Channels](#channels)
@@ -38,46 +50,81 @@ Contents
 Resources
 ---------
 
-There are a number of files available in this project. Here is a brief
-description of some of the files:
+There are a number of resource files provided in the [out/](out/)
+directory of this project. Visit [susam.github.io/pcface/out/][OUT] to
+browse these resources. The directory at this URL contains
+subdirectories for various free fonts based on the original IBM PC OEM
+fonts. Each font directory contains a number of resources. Links to
+modern-dos-8x16 resource files are provided below as examples while
+describing these resources. Here is a brief description of the
+resource files in each directory.
 
-- [out/fontlist.js](out/fontlist.js): Bitmap representation of all
-  CP437 glyphs as a JavaScript array.
-- [out/fontmap.js](out/fontmap.js): Bitmap representation of all CP437
-  glyphs as a JavaScript object that maps Unicode characters that
-  approximate the glyphs to their bitmaps.
-- [out/glyph.txt](out/glyph.txt): All CP437 glyphs represented using
+- [out/modern-dos-8x16/fontlist.js][]: Bitmap representation of all
+  256 glyphs from the CP437 character set exposed as a JavaScript
+  array of bitmap arrays. Each bitmap array represents the bitmap of a
+  CP437 character.
+- [out/moderndos-8x16/fontmap.js][]: Bitmap representation of all
+  CP437 glyphs from the CP437 character set exposed as a JavaScript
+  object that maps each CP437 character to its bitmap array.
+- [out/moderndos-8x16/glyph.txt][]: All CP437 glyphs represented using
   asterisks.
-- [out/graph.txt](out/graph.txt): All CP437 glyphs represented using
-  the at symbol and dots. Each row of the glyph is prefixed with the
-  binary code of the row represented in hexadecimal. The same binary
-  codes appear in the JavaScript files mentioned above.
+- [out/moderdns-8x16/graph.txt][]: All CP437 glyphs represented using
+  the at symbol (`@`) and dots (`.`). Each row of the glyph is
+  prefixed with the binary code of the row represented in hexadecimal.
+  The same binary codes appear as comments in the JavaScript files
+  mentioned above.
+- [out/moderndos-8x16/preview-8x16.png][]: A preview of all the fonts
+  read from the original font file.
+- [out/moderndos-8x16/preview-16x32.png][]: A larger preview of all
+  the fonts read from the original font file.
 
-The bitmap array files are also available at the following CDN URLs:
+Similar resource files are available for each such font included in
+this project. Visit [susam.github.io/pcface/out/][OUT] to browse these
+files for all fonts available in this project.
 
-- https://cdn.jsdelivr.net/npm/pcface/out/fontlist.js
-- https://cdn.jsdelivr.net/npm/pcface/out/fontmap.js
+[OUT]: https://susam.github.io/pcface/out/
+[out/modern-dos-8x16/fontlist.js]: https://susam.github.io/pcface/out/moderndos-8x16/fontlist.js
+[out/moderndos-8x16/fontmap.js]: https://susam.github.io/pcface/out/moderndos-8x16/fontmap.js
+[out/moderndos-8x16/glyph.txt]: https://susam.github.io/pcface/out/moderndos-8x16/glyph.txt
+[out/moderndos-8x16/graph.txt]: https://susam.github.io/pcface/out/moderndos-8x16/graph.txt
+[out/moderndos-8x16/preview-16x32.png]: https://susam.github.io/pcface/out/moderndos-8x16/preview-16x32.png
+[out/moderndos-8x16/preview-8x16.png]: https://susam.github.io/pcface/out/moderndos-8x16/preview-8x16.png
 
-You are free to use these resources or any file available in this
-project under the terms of the MIT license. Perhaps you are making a
-retro-style game from first principles where you decide what each
-pixel should be. Perhaps you want to render CP437 glyphs using
-asterisks to make a text banner. The resource files available in this
-project might turn out to be useful for such activities if you are
-ready to write some code to translate the available bitmaps to pixels
-on screen.
+These resource files are also available via CDN at
+<https://cdn.jsdelivr.net/npm/pcface/out/>.
+
+
+Demo
+----
+
+For a quick demo of the various bitmaps available in this project,
+visit the demo page at [susam.github.io/pcface/demo/][DEMO]. There is
+a dropdown menu at the bottom that can be used to select bitmaps for
+different fonts.
+
+In the demo page, you would notice that each bitmap demo comes in two
+variants: one with the suffix `font-list` and another with the suffix
+`font-map`. The `font-list` demo loads `fontlist.js` of the chosen
+font and renders the glyphs in green. The `font-map` demo loads
+`fontmap.js` of the chosen font and renders the glyphs in amber. The
+rendered glyphs look exactly the same in both demos because the same
+bitmap arrays are used in both cases. The only difference between
+`fontlist.js` and `fontmap.js` is how these bitmap arrays are exposed
+in a JavaScript `const`. The former exposes an array of bitmap arrays
+whereas the latter exposes an object that maps each CP437 character to
+its bitmap array.
 
 
 Bitmap Format
 -------------
 
-The format of the bitmaps available in
-[out/fontlist.js](out/fontlist.js) and
-[out/fontmap.js](out/fontmap.js) is quite simple. Each glyph is
-represented with a 8x16 grid of pixels, i.e., 16 rows of pixels with 8
-columns in each column. The 16 rows are represented as 16 integers in
-the bitmap (a list of integers) for each glyph. For example, the glyph
-for the uppercase letter 'B' is represented as:
+The format of the bitmaps available in this project is quite simple.
+Each glyph is represented with a WxH grid of pixels where W is the
+width of each glyph and H is the height of each glyph. For example,
+each bitmap in [moderndos-8x16][] represents 16 rows of pixels with 8
+columns in each row. These 16 rows are represented as 16 integers in
+the bitmap for each glyph. For example, the glyph for the uppercase
+letter 'B' rendered using this font is represented as:
 
 ```javascript
   [
@@ -90,8 +137,8 @@ Each integer represents the dots that must be plotted for every row of
 the glyph. The integers `0x00` and `0x00` at the beginning means that
 the top two rows of the glyph are blank. Then `0xfc` (binary
 `1111100`) means that the first 6 pixels of the third row are plotted
-with the font colour and the last two pixels are left blank. In this
-manner, 16 rows of pixels must be plotted.
+with the font's foreground colour and the last two pixels are left
+blank. In this manner, 16 rows of pixels must be plotted.
 
 Here is an example Python code that reads these bitmaps and plots the
 glyph on standard output using a dot (`.`) for every `0` bit and the
@@ -130,55 +177,48 @@ Here is the output:
 ```
 
 If you need more help with writing the code to translate the bitmaps
-to pixels, refer to the `drawChar()` function in
-[src/fontlist.html](src/fontlist.html) or
-[src/fontmap.html](src/fontmap.html) to see an example of how you can
-read the bitmap and plot the bitmap on a canvas. You may also refer to
-the `drawLine()` function to draw a line of text or the `drawLines()`
-function to draw multiple lines of text. It should be possible to
-refer to these functions and write similar code for the programming
-language and graphical toolkit of your choice.
+to pixels, refer to the `drawChar()`, `drawString()`, and
+`drawStrings()` functions in [src/pcface.js](src/pcface.js). You can
+also load this script in your web page using a CDN URL and use these
+functions directly in your page. This is explained in more detail in
+section [JavaScript API](#javascript-api).
+
+It should be possible to refer to these functions and write similar
+code in a different programming language for a graphical toolkit of
+your choice.
+
+[moderndos-8x16]: https://susam.github.io/pcface/out/moderndos-8x16
 
 
 Font Details
 ------------
 
-The font used in this project is [Modern DOS 8x16][MDOS] version
-20190101.02 developed by Jayvee Enaguas. Jayvee has made this font
-available under the terms of [CC0 1.0 Universal Public Domain
-Dedication][CC0]. A copy of the font is also archived in the
-[src/modern-dos/](src/modern-dos/) directory of this project. A
-preview of this font is available here:
+### Modern DOS Font
+
+This project includes [Modern DOS 8x16][MDOS] font (version
+20190101.02) developed by Jayvee Enaguas. This font is available under
+the terms of [CC0 1.0 Universal Public Domain Dedication][CC0]. A copy
+of the font is also archived in the
+[src/modern-dos/](src/font/modern-dos/) directory of this project.
 
 - [out/preview-8x16.png](out/preview-8x16.png)
 - [out/preview-16x32.png](out/preview-16x32.png)
 
 This font is based on the [IBM VGA 8x16][VGA] and [Verite
-8x16][VERITE] OEM fonts. Some glyphs in this font look exactly like
-the glyphs of IBM VGA 8x16 while some others look exactly like the
-glyphs of Verite 8x16. However, there are also several glyphs in this
-font that match neither of the two OEM fonts. Instead they happen to
-be adaptations of the glyphs found in one or both of the OEM fonts.
+8x16][VERITE] OEM fonts for IBM PCs. Some glyphs in this font look
+exactly like the glyphs of IBM VGA 8x16 while some others look exactly
+like the glyphs of Verite 8x16. However, there are also several glyphs
+in this font that match neither of the two OEM fonts. Instead they
+happen to be adaptations of the glyphs found in one or both of the OEM
+fonts.
 
-In my opinion, Jayvee Enaguas has done an outstanding job of picking
-the best parts from both OEM fonts (IBM VGA 8x16 and Verite 8x16) and
-fused them together to create this font (Modern DOS 8x16). I like that
-this font has the slashed zero of Verite. I also like the more
-squarish outline of the letters in Verite that has been inherited into
-this font. While it inherits a lot of good design from Verite 8x16, it
-also inherits some nice features from IBM VGA 8x16. For example, it
-has the raised stem for the digit 2 and the curved stem for the digit
-7 from IBM VGA 8x16.
-
-In case, you prefer another PC font, say one of the fonts available at
-<https://int10h.org/oldschool-pc-fonts/fontlist/>, you can generate
-the resource files and bitmap arrays by running this command at the
-top-level directory of this project:
-
-```sh
-make venv
-venv/bin/python3 src/pcface.py PATH_TO_TTF_FILE
-```
+In my opinion, this font contains the best parts of both OEM fonts. I
+like that this font has the slashed zero of Verite. I also like the
+more squarish outline of the letters in Verite that has been inherited
+into this font. While it inherits a lot of good design from Verite
+8x16, it also inherits some nice features from IBM VGA 8x16. For
+example, it has the raised stem for the digit 2 and the curved stem
+for the digit 7 from IBM VGA 8x16.
 
 [MDOS]: https://www.dafont.com/modern-dos.font
 [CC0]: https://creativecommons.org/publicdomain/zero/1.0/
@@ -186,12 +226,61 @@ venv/bin/python3 src/pcface.py PATH_TO_TTF_FILE
 [VERITE]: https://int10h.org/oldschool-pc-fonts/fontlist/font?verite_8x16
 
 
-Credit
-------
+### Oldschool PC Fonts
 
-Thanks to Jayvee Enaguas for making *Modern DOS* available under the
-terms of [CC0 1.0 Universal (CC0 1.0) Public Domain Dedication][CC0].
-This project is based on the *8x16* variant of this font.
+This project includes several [Oldschool PC][OLDSCHOOL] fonts (version
+2.2) developed by VileR. These fonts are available terms of [Creative
+Commons Attribution-ShareAlike 4.0 International License][CCBYSA]
+
+These fonts do an excellent job of reproducing the original IBM PC OEM
+fonts as faithfully as possible. However, these fonts also differ from
+the original OEM fonts in minor ways, especially, to correct minor
+errors in the original fonts. See the FAQ at the [Oldschool PC
+Documentation][OLDSCHOOLDOC] for more details about this.
+
+[OLDSCHOOL]: https://int10h.org/oldschool-pc-fonts/fontlist/
+[OLDSCHOOLDOC]: https://int10h.org/oldschool-pc-fonts/readme/
+[CCBYSA]: https://creativecommons.org/licenses/by-sa/4.0/
+
+
+API Documentation
+-----------------
+
+While the primary purpose of this project is to distribute bitmap
+arrays for CP437 glyphs, this project also makes some of its scripts
+that went into generating and testing the bitmaps as Python and
+JavaScript functions. The documentation for these functions can be
+found here:
+
+- [Python API Documentation][PYDOC]
+- [JavaScript API Documentation][JSDOC]
+
+[PYDOC]: https://susam.github.io/pcface/doc/py/api/pcface.html
+[JSDOC]: https://susam.github.io/pcface/doc/js/module-pcface.html
+
+
+API Usage
+---------
+
+The subsections in this section provide a very brief introduction to
+how to get started with the Python and JavaScript functions exposed by
+this project. For a detailed account of what each function does, refer
+to the API documentation links provided in the previous section.
+
+
+### Python API
+
+TODO
+
+
+### Python Tool
+
+TODO
+
+
+### JavaScript API
+
+TODO
 
 
 License
@@ -237,5 +326,5 @@ More
 ----
 
 See [Andromeda Invaders](https://github.com/susam/invaders) where a
-small subset of the bitmaps available in this project has been used to
-render text on a game canvas.
+small subset of the Modern DOS 8x16 bitmaps available in this project
+has been used to render text on a game canvas.
