@@ -128,7 +128,7 @@
 
 (defun make-html-row (path size)
   (with-output-to-string (s)
-    (let ((href (if (string-ends-with "/" path) (fstr "~aindex.html" path) path)))
+    (let ((href (if (string-ends-with "/" path) (fstr "~a~a" path *index*) path)))
       (format s "    <tr>~%")
       (format s "      <td><a href=\"~a\">~a</a></td>~%" href path)
       (format s "      <td>~a</td>~%" size)
@@ -176,5 +176,7 @@
     ;; Return total size of current directory tree to caller.
     total-size))
 
+(defvar *index* ""
+  "Filename to be used as path suffix in links to directories.")
 
 (visit-directory (truename "_site/") (truename "_site/"))

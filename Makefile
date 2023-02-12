@@ -83,14 +83,22 @@ preview-char:
 
 
 # Publish demos and documentation
-site: doc
-	rm -rf _site/ && mkdir -p _site/
+stage: doc
+	rm -rf _site/ && mkdir -p _site/demo/
 	touch _site/.nojekyll
 	cp -R out/ _site/out/
 	cp -R doc/ _site/doc/
-	sbcl --script src/index.lisp
+	cp src/pcface.js _site/demo/pcface.js
+	cp src/demo.html _site/demo/index.html
+	cp src/minidemo.html _site/demo/minidemo.html
 
-live: site
+site: stage
+	sbcl --eval '(defvar *index* "index.html")' --load src/index.lisp --quit
+
+livesite: stage
+	sbcl --load src/index.lisp --quit
+
+live: livesite
 	rm -rf /tmp/live
 	mv _site /tmp/live
 	REPO_DIR="$$PWD"; cd /tmp/live && make -f "$$REPO_DIR/Makefile" pushlive
