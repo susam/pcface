@@ -84,6 +84,7 @@ preview-char:
 # Publish demos and documentation
 site: doc
 	rm -rf _site/ && mkdir -p _site/
+	touch _site/.nojekyll
 	cp -R out/ _site/out/
 	cp -R doc/ _site/doc/
 	sbcl --script src/index.lisp
