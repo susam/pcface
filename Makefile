@@ -60,6 +60,7 @@ pydoc: rmdoc
 	echo '.. toctree::' >> doc/sphinx/index.rst
 	echo '   api/modules' >> doc/sphinx/index.rst
 	PYTHONPATH=src venv/bin/sphinx-build -b html doc/sphinx/ doc/py/
+	rm -rf doc/sphinx
 	echo 'Documentation available at doc/py/index.html'
 
 jsdoc: rmdoc
