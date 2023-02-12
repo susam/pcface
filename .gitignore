@@ -4,5 +4,6 @@ dist/
 src/pcface.egg-info/
 __pycache__/
 doc/
+_site/
 package-lock.json
 pcface*.tgz

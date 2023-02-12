@@ -80,6 +80,31 @@ preview-char:
 	xdg-open out/preview-B.png || open out/preview-B.png
 
 
+# Publish demos and documentation
+site: doc
+	rm -rf _site/ && mkdir -p _site/
+	cp -R out/ _site/out/
+	cp -R doc/ _site/doc/
+	sbcl --script src/index.lisp
+
+live: site
+	rm -rf /tmp/live
+	mv _site /tmp/live
+	REPO_DIR="$$PWD"; cd /tmp/live && make -f "$$REPO_DIR/Makefile" pushlive
+
+pushlive:
+	pwd | grep live$$ || false
+	git init
+	git config user.name live
+	git config user.email live@localhost
+	git remote add origin https://github.com/susam/pcface.git
+	git checkout -b live
+	git add .
+	git commit -m "Publish live ($$(date -u +"%Y-%m-%d %H:%M:%S"))"
+	git log
+	git push -f origin live
+
+
 # Distribution Targets
 # --------------------
 
