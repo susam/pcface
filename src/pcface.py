@@ -264,7 +264,7 @@ given font.
     return args
 
 
-def _main():
+def main():
     """Generate previews, graphs, and bitmap arrays."""
     args = _parse_arguments()
     chars = cp437()
@@ -327,4 +327,4 @@ def _main():
 
 
 if __name__ == '__main__':
-    _main()
+    main()
