@@ -119,7 +119,13 @@ pushlive:
 # Distribution Targets
 # --------------------
 
-dist: clean
+pkgreadme:
+	sed -n '1,/^.CP437IMG./p' README.md > src/pypi.md
+	echo >> src/pypi.md
+	echo 'See <https://github.com/susam/pcface> for more details.' >> src/pypi.md
+	cat src/pypi.md
+
+dist: clean pkgreadme
 	venv/bin/python3 -m build
 	venv/bin/twine check dist/*
 	unzip -c dist/*.whl '*/METADATA'
@@ -130,6 +136,32 @@ test-upload:
 
 upload:
 	venv/bin/twine upload dist/*
+
+user-venv: FORCE
+	rm -rf user-venv/
+	python3 -m venv user-venv/
+
+verify-upload:
+	$(MAKE) verify-sdist
+	$(MAKE) verify-bdist
+
+verify-test-upload:
+	$(MAKE) verify-test-sdist
+	$(MAKE) verify-test-bdist
+
+verify-sdist:
+	user-venv/bin/pip3 install --no-binary :all: mintotp
+
+verify-bdist:
+	user-venv/bin/pip3 install mintotp
+
+verify-test-sdist: user-venv
+	user-venv/bin/pip3 install \
+	  --index-url https://test.pypi.org/simple/ --no-binary :all: mintotp
+
+verify-test-bdist: user-venv
+	user-venv/bin/pip3 install \
+	  --index-url https://test.pypi.org/simple/ mintotp
 
 
 # Font Downloads

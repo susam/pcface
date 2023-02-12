@@ -9,6 +9,9 @@ original IBM PC OEM fonts.
 
 ![CP437 characters rendered on an HTML5 canvas][CP437IMG]
 
+[CP437WIKI]: https://en.wikipedia.org/wiki/Code_page_437
+[CP437IMG]: https://susam.github.io/blob/img/pcface/pcface-0.2.0.png
+
 Additionally, this project includes a [Python script][PY] to generate
 these bitmaps. This script could be useful for generating similar
 bitmaps for other fonts not included in this project. This project
@@ -20,8 +23,6 @@ sections below.
 
 Visit [susam.github.io/pcface/demo][DEMO] to see a demo.
 
-[CP437WIKI]: https://en.wikipedia.org/wiki/Code_page_437
-[CP437IMG]: https://susam.github.io/blob/img/pcface/pcface-0.2.0.png
 [PY]: src/pcface.py
 [JS]: src/pcface.js
 [DEMO]: https://susam.github.io/pcface/demo/

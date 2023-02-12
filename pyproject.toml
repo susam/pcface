@@ -2,7 +2,7 @@
 name = "pcface"
 version = "0.3.0-dev"
 description = "PC Face - Bitmap arrays for all 256 glyphs of CP437"
-readme = "README.md"
+readme = "src/pypi.md"
 license = {text = "MIT"}
 keywords = ["font", "cp437", "retro"]
 authors = [{name = "Susam Pal"}]

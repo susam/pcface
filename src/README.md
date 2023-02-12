@@ -8,13 +8,13 @@ Setup
  1. To set up development environment, enter:
 
     ```sh
-    make venv
+    make deps
     ```
 
  2. Then enter:
 
     ```sh
-    make bitmap
+    make pcface
     ```
 
 
@@ -56,14 +56,20 @@ Perform the following tasks for every release:
     git push origin main $VERSION
     ```
 
-  - Publish package.
+  - Publish Python package.
+
+    ```
+    make dist
+    make test-upload
+    make verify-test-upload
+    make upload
+    make verify-upload
+
+  - Publish JavaScript package.
 
     ```
     npm login
     npm publish
-    make dist
-    make test-upload
-    make upload
     ```
 
   - Make a release on GitHub.
