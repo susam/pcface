@@ -42,6 +42,10 @@ Contents
   * [Python Tool](#python-tool)
   * [JavaScript API](#javascript-api)
 * [License](#license)
+  * [Original Fonts](#original-fonts)
+  * [Modern DOS Bitmaps](#modern-dos-bitmaps)
+  * [Oldschool PC Font Bitmaps](#oldschool-pc-font-bitmaps)
+  * [Source Code](#source-code)
 * [Support](#support)
 * [Channels](#channels)
 * [More](#more)
@@ -283,6 +287,8 @@ TODO
 License
 -------
 
+### Original Fonts
+
 The original fonts archived in this project are available under the
 terms of the orignal licenses chosen by the font developers, i.e.,
 
@@ -292,11 +298,19 @@ terms of the orignal licenses chosen by the font developers, i.e.,
   terms of the [Creative Commons Attribution-ShareAlike 4.0
   International License][CCBYSA].
 
+
+### Modern DOS Bitmaps
+
 You may use the content of the following directory under the terms of
 either the [MIT License][L] or the [CC0 1.0 Universal Public Domain
 Dedication][CC0]:
 
 - [out/out/moderndos-8x16/](out/out/moderndos-8x16/)
+
+[L]: LICENSE.md
+
+
+### Oldschool PC Font Bitmaps
 
 You may use the content of the following directory under the terms of
 either the [GNU General Public License v3][GPL] or the [Creative
@@ -314,12 +328,14 @@ Commons Attribution-ShareAlike 4.0 International License][CCBYSA]:
 - [out/oldschool-vga-9x16/](out/oldschool-vga-9x16/)
 - [src/demo.html](src/demo.html)
 
-All other files in this project, excluding the ones listed in the
-three lists above, are available under the terms of the of the MIT
-License. See [LICENSE.md][L] for the complete license text.
-
-[L]: LICENSE.md
 [GPL]: https://www.gnu.org/licenses/gpl-3.0.html
+
+
+### Source Code
+
+All other files in this project, excluding the ones listed in the
+three subsections above, are available under the terms of the MIT
+License. See [LICENSE.md][L] for the complete license text.
 
 
 Support
