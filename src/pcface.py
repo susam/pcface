@@ -9,31 +9,7 @@ import sys
 from PIL import Image, ImageDraw, ImageFont
 
 
-# pylint: disable-next=too-many-arguments
-def make_preview(text, path, cols, width, height, scale):
-    """Create a preview of the given text rendered with given font.
-
-    Arguments:
-        text (char): Text to create a preview image for.
-        path (str): Path to font file.
-        cols (int): Width of preview in terms of number of character columns.
-        width (int): Width of each glyph in the given font.
-        height (int): Height of each glyph in the given font.
-
-    Returns:
-        Image: Preview image.
-    """
-    rows = math.ceil(len(text) / cols)
-    image = Image.new('1', (cols * width * scale, rows * height * scale))
-    draw = ImageDraw.Draw(image)
-    draw.font = ImageFont.truetype(path, height * scale)
-    for row in range(rows):
-        chunk = text[row * cols:(row + 1) * cols]
-        draw.text((0, row * height * scale), chunk, fill=1)
-    return image
-
-
-def make_bitmap(char, path, width, height):
+def make_bitmap(char, path, size, width, height):
     """Create bitmap for a given character.
 
     The given font file is used to internally render the given
@@ -46,6 +22,7 @@ def make_bitmap(char, path, width, height):
     Arguments:
         char (str): Character to create bitmap for.
         path (str): Path to font file.
+        size (int): Font size that creates rendered glyph of given height.
         width (int): Width of each glyph in the given font.
         height (int): Height of each glyph in the given font.
 
@@ -55,7 +32,7 @@ def make_bitmap(char, path, width, height):
     """
     image = Image.new('1', (width, height))
     draw = ImageDraw.Draw(image)
-    draw.font = ImageFont.truetype(path, height)
+    draw.font = ImageFont.truetype(path, size)
     draw.text((0, 0), char, fill=1)
     bitmap = []
     for row in range(height):
@@ -67,7 +44,7 @@ def make_bitmap(char, path, width, height):
     return bitmap
 
 
-def make_bitmaps(chars, path, width, height):
+def make_bitmaps(chars, path, size, width, height):
     """Create bitmaps for all given characters.
 
     For each character in ``chars``, the bitmap of the character is
@@ -77,13 +54,14 @@ def make_bitmaps(chars, path, width, height):
     Arguments:
         chars (str): One or more characters.
         path (str): Path to font file.
+        size (int): Font size that creates rendered glyph of given height.
         width (int): Width of each glyph in the given font.
         height (int): Height of each glyph in the given font.
 
     Returns:
         list[list[int]]: A list of bitmaps.
     """
-    return [make_bitmap(c, path, width, height) for c in chars]
+    return [make_bitmap(c, path, size, width, height) for c in chars]
 
 
 def make_graph(bitmap, width, symbols, prefix):
@@ -96,9 +74,9 @@ def make_graph(bitmap, width, symbols, prefix):
     `symbols[1]`.
 
     Arguments:
-        char (str): A single character.
-        bitmaps (list[int]): A list of bitmaps.
+        bitmap (list[int]): Bitmap of a single glyph.
         width (int): Width of each glyph.
+        symbols (str): Symbols to use 0 and 1 in the graph.
         prefix (bool): Whether to prefix each line of output with an
             integer that represents the bitmap value for the
             corresponding row of the glyph.
@@ -133,6 +111,10 @@ def make_graphs(chars, bitmaps, width, symbols, prefix):
         chars (str): One or more characters.
         bitmaps (list[list[int]]): A list of corresponding bitmaps.
         width (int): Width of each glyph.
+        symbols (str): Symbols to use 0 and 1 in the graph.
+        prefix (bool): Whether to prefix each line of output with an
+            integer that represents the bitmap value for the
+            corresponding row of the glyph.
 
     Returns:
         str: A string containing the ASCII graphs of the bitmaps.
@@ -156,7 +138,7 @@ def make_font_list(chars, bitmaps, const_name):
     Arguments:
       chars (str): One or more characters.
       bitmaps (list[list[int]]): A list of corresponding bitmaps.
-      const_name (str): Constant name to assign the array to.
+      const_name (str): JavaScript constant name to assign the array to.
 
     Returns:
       str: JavaScript code that represents bitmaps as an array of arrays.
@@ -233,6 +215,31 @@ def cp437chars():
     return ''.join([chr(code) for code in codes])
 
 
+# pylint: disable-next=too-many-arguments
+def make_preview(text, path, size, cols, width, height, scale):
+    """Create a preview of the given text rendered with given font.
+
+    Arguments:
+        text (char): Text to create a preview image for.
+        path (str): Path to font file.
+        size (int): Font size that creates rendered glyph of given height.
+        cols (int): Width of preview in terms of number of character columns.
+        width (int): Width of each glyph in the given font.
+        height (int): Height of each glyph in the given font.
+
+    Returns:
+        Image: Preview image.
+    """
+    rows = math.ceil(len(text) / cols)
+    image = Image.new('1', (cols * width * scale, rows * height * scale))
+    draw = ImageDraw.Draw(image)
+    draw.font = ImageFont.truetype(path, size * scale)
+    for row in range(rows):
+        chunk = text[row * cols:(row + 1) * cols]
+        draw.text((0, row * height * scale), chunk, fill=1)
+    return image
+
+
 def _parse_arguments():
     """Parse command line arguments."""
     description = """
@@ -245,6 +252,10 @@ given font.
     parser = argparse.ArgumentParser(description=description)
     parser.add_argument('--cp437', action='store_true',
                         help='print all CP437 characters and exit')
+    parser.add_argument('-s', '--font-size', type=int, default=0,
+                        help='font size used to render characters'
+                             ' (default: font height specified in'
+                             ' output directory name)')
     parser.add_argument('font_path', nargs='?',
                         help='path to font file')
     parser.add_argument('output_dir', nargs='?',
@@ -265,7 +276,6 @@ def main():
 
     # Determine font label and dimensions from output directory path.
     match = re.match(r'^(?:.*/)?(.+)-(\d+)x(\d+)/?$', args.output_dir)
-    print(match.groups())
     if match is None:
         print('Error: Directory name must be in LABEL-WxH format')
         sys.exit(1)
@@ -277,19 +287,20 @@ def main():
     os.makedirs(args.output_dir, exist_ok=True)
 
     # Write previews images.
+    font_size = args.font_size if args.font_size > 0 else height
     text = chars.replace('\0', ' ')  # Blank glyph for null character.
 
-    image = make_preview(text, args.font_path, 32, width, height, 1)
+    image = make_preview(text, args.font_path, font_size, 32, width, height, 1)
     path = os.path.join(args.output_dir, f'preview-{width}x{height}.png')
     image.save(path)
 
-    image = make_preview(text, args.font_path, 32, width, height, 2)
+    image = make_preview(text, args.font_path, font_size, 32, width, height, 2)
     path = os.path.join(args.output_dir,
                         f'preview-{width * 2}x{height * 2}.png')
     image.save(path)
 
     # Compute bitmaps.
-    bitmaps = make_bitmaps(chars, args.font_path, width, height)
+    bitmaps = make_bitmaps(chars, args.font_path, font_size, width, height)
     bitmaps[0] = bitmaps[32]  # Blank glyph for null character.
 
     # Write text graphs.

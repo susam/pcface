@@ -3,6 +3,16 @@
 
 pcface:
 	venv/bin/python3 src/pcface.py src/font/moderndos/ModernDOS8x16.ttf out/moderndos-8x16/
+	venv/bin/python3 src/pcface.py src/font/oldschool/Px437_IBM_BIOS.ttf out/oldschool-bios-8x8/
+	venv/bin/python3 src/pcface.py src/font/oldschool/Px437_IBM_CGA.ttf out/oldschool-cga-8x8/
+	venv/bin/python3 src/pcface.py -s 16 src/font/oldschool/Px437_IBM_MDA.ttf out/oldschool-mda-9x14/
+	venv/bin/python3 src/pcface.py -s 16 src/font/oldschool/Px437_IBM_EGA_8x14.ttf out/oldschool-ega-8x14/
+	venv/bin/python3 src/pcface.py src/font/oldschool/Px437_IBM_VGA_9x16.ttf out/oldschool-vga-9x16/
+	venv/bin/python3 src/pcface.py -s 16 src/font/oldschool/Px437_IBM_VGA_9x14.ttf out/oldschool-vga-9x14/
+	venv/bin/python3 src/pcface.py src/font/oldschool/Px437_IBM_VGA_8x16.ttf out/oldschool-vga-8x16/
+	venv/bin/python3 src/pcface.py src/font/oldschool/Px437_IBM_PGC.ttf out/oldschool-pgc-8x16/
+	venv/bin/python3 src/pcface.py src/font/oldschool/Px437_IBM_Model30r0.ttf out/oldschool-model30-8x16/
+	venv/bin/python3 src/pcface.py src/font/oldschool/Px437_Verite_8x16.ttf out/oldschool-verite-8x16/
 
 deps:
 	python3 -m venv venv/
@@ -86,11 +96,12 @@ upload:
 	venv/bin/twine upload dist/*
 
 
-
 # Font Downloads
 # --------------
 
-download-fonts: download-modern-dos
+download-fonts: download-modern-dos download-oldschool
+	du -sh src/font/*
+	du -sh src/font/
 
 download-modern-dos:
 	rm -rf moderndos.zip src/font/moderndos/
@@ -98,5 +109,26 @@ download-modern-dos:
 	mkdir -p src/font/moderndos/
 	cd src/font/moderndos/ && unzip ../../../moderndos.zip
 	rm moderndos.zip
+
+download-oldschool:
+	rm -rf oldschool.zip tmp/ src/font/oldschool/
+	curl -o oldschool.zip \
+		'https://int10h.org/oldschool-pc-fonts/download/oldschool_pc_font_pack_v2.2_FULL.zip'
+	mkdir -p tmp
+	cd tmp/ && unzip ../oldschool.zip
+	mv "tmp/ttf - Px (pixel outline)/" tmp/ttf/
+	mkdir -p src/font/oldschool/
+	cp tmp/*TXT src/font/oldschool/
+	cp tmp/ttf/Px437_IBM_BIOS.ttf src/font/oldschool/
+	cp tmp/ttf/Px437_IBM_CGA.ttf src/font/oldschool/
+	cp tmp/ttf/Px437_IBM_MDA.ttf src/font/oldschool/
+	cp tmp/ttf/Px437_IBM_EGA_8x14.ttf src/font/oldschool/
+	cp tmp/ttf/Px437_IBM_VGA_9x16.ttf src/font/oldschool/
+	cp tmp/ttf/Px437_IBM_VGA_9x14.ttf src/font/oldschool/
+	cp tmp/ttf/Px437_IBM_VGA_8x16.ttf src/font/oldschool/
+	cp tmp/ttf/Px437_IBM_PGC.ttf src/font/oldschool/
+	cp tmp/ttf/Px437_IBM_Model30r0.ttf src/font/oldschool/
+	cp tmp/ttf/Px437_Verite_8x16.ttf src/font/oldschool/
+	rm -rf oldschool.zip tmp/
 
 FORCE:

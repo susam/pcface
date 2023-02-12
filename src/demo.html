@@ -25,19 +25,57 @@
         display: block;
       }
     </style>
-    <script src="../out/modern-dos-8x16/fontlist.js"></script>
-    <script src="../out/modern-dos-8x16/fontmap.js"></script>
+    <script src="../out/moderndos-8x16/fontlist.js"></script>
+    <script src="../out/moderndos-8x16/fontmap.js"></script>
+    <script src="../out/oldschool-bios-8x8/fontlist.js"></script>
+    <script src="../out/oldschool-bios-8x8/fontmap.js"></script>
+    <script src="../out/oldschool-cga-8x8/fontlist.js"></script>
+    <script src="../out/oldschool-cga-8x8/fontmap.js"></script>
+    <script src="../out/oldschool-mda-9x14/fontlist.js"></script>
+    <script src="../out/oldschool-mda-9x14/fontmap.js"></script>
+    <script src="../out/oldschool-ega-8x14/fontlist.js"></script>
+    <script src="../out/oldschool-ega-8x14/fontmap.js"></script>
+    <script src="../out/oldschool-vga-9x16/fontlist.js"></script>
+    <script src="../out/oldschool-vga-9x16/fontmap.js"></script>
+    <script src="../out/oldschool-vga-9x14/fontlist.js"></script>
+    <script src="../out/oldschool-vga-9x14/fontmap.js"></script>
+    <script src="../out/oldschool-vga-8x16/fontlist.js"></script>
+    <script src="../out/oldschool-vga-8x16/fontmap.js"></script>
+    <script src="../out/oldschool-pgc-8x16/fontlist.js"></script>
+    <script src="../out/oldschool-pgc-8x16/fontmap.js"></script>
+    <script src="../out/oldschool-model30-8x16/fontlist.js"></script>
+    <script src="../out/oldschool-model30-8x16/fontmap.js"></script>
+    <script src="../out/oldschool-verite-8x16/fontlist.js"></script>
+    <script src="../out/oldschool-verite-8x16/fontmap.js"></script>
     <script src="pcface.js"></script>
     <script>
       'use strict'
 
-      const CANVAS_WIDTH = 640
-      const CANVAS_HEIGHT = 480
       const SELECT_HEIGHT = 30
       const PADDING = 10
       const DEMO = {
-        'modern-dos-8x16-font-list': PC_FACE_MODERN_DOS_8X16_FONT_LIST,
-        'modern-dos-8x16-font-map': PC_FACE_MODERN_DOS_8X16_FONT_MAP
+        'moderndos-8x16-font-list': PC_FACE_MODERNDOS_8X16_FONT_LIST,
+        'moderndos-8x16-font-map': PC_FACE_MODERNDOS_8X16_FONT_MAP,
+        'oldschool-bios-8x8-font-list': PC_FACE_OLDSCHOOL_BIOS_8X8_FONT_LIST,
+        'oldschool-bios-8x8-font-map': PC_FACE_OLDSCHOOL_BIOS_8X8_FONT_MAP,
+        'oldschool-cga-8x8-font-list': PC_FACE_OLDSCHOOL_CGA_8X8_FONT_LIST,
+        'oldschool-cga-8x8-font-map': PC_FACE_OLDSCHOOL_CGA_8X8_FONT_MAP,
+        'oldschool-mda-9x14-font-list': PC_FACE_OLDSCHOOL_MDA_9X14_FONT_LIST,
+        'oldschool-mda-9x14-font-map': PC_FACE_OLDSCHOOL_MDA_9X14_FONT_MAP,
+        'oldschool-ega-8x14-font-list': PC_FACE_OLDSCHOOL_EGA_8X14_FONT_LIST,
+        'oldschool-ega-8x14-font-map': PC_FACE_OLDSCHOOL_EGA_8X14_FONT_MAP,
+        'oldschool-vga-9x16-font-list': PC_FACE_OLDSCHOOL_VGA_9X16_FONT_LIST,
+        'oldschool-vga-9x16-font-map': PC_FACE_OLDSCHOOL_VGA_9X16_FONT_MAP,
+        'oldschool-vga-9x14-font-list': PC_FACE_OLDSCHOOL_VGA_9X14_FONT_LIST,
+        'oldschool-vga-9x14-font-map': PC_FACE_OLDSCHOOL_VGA_9X14_FONT_MAP,
+        'oldschool-vga-8x16-font-list': PC_FACE_OLDSCHOOL_VGA_8X16_FONT_LIST,
+        'oldschool-vga-8x16-font-map': PC_FACE_OLDSCHOOL_VGA_8X16_FONT_MAP,
+        'oldschool-pgc-8x16-font-list': PC_FACE_OLDSCHOOL_PGC_8X16_FONT_LIST,
+        'oldschool-pgc-8x16-font-map': PC_FACE_OLDSCHOOL_PGC_8X16_FONT_MAP,
+        'oldschool-model30-8x16-font-list': PC_FACE_OLDSCHOOL_MODEL30_8X16_FONT_LIST,
+        'oldschool-model30-8x16-font-map': PC_FACE_OLDSCHOOL_MODEL30_8X16_FONT_MAP,
+        'oldschool-verite-8x16-font-list': PC_FACE_OLDSCHOOL_VERITE_8X16_FONT_LIST,
+        'oldschool-verite-8x16-font-map': PC_FACE_OLDSCHOOL_VERITE_8X16_FONT_MAP
       }
 
       let canvas
@@ -48,8 +86,6 @@
         canvas = document.getElementById('canvas')
         select = document.getElementById('select')
         ctx = canvas.getContext('2d')
-        canvas.width = CANVAS_WIDTH
-        canvas.height = CANVAS_HEIGHT
         select.style.marginTop = PADDING + 'px'
         select.style.marginBottom = PADDING + 'px'
         select.style.height = SELECT_HEIGHT + 'px'
@@ -59,10 +95,9 @@
           option.innerHTML = key
           select.appendChild(option)
         }
-        ctx.fillStyle = '#000'
-        ctx.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
-        resizeCanvas()
-        setHash()
+        if (window.location.hash !== '') {
+          select.value = window.location.hash.substring(1)
+        }
         setDemo()
         window.addEventListener('resize', resizeCanvas)
         window.addEventListener('hashchange', setDemo)
@@ -106,8 +141,9 @@
         document.body.style.padding = PADDING + 'px'
         const availableHeight = window.innerHeight - 3 * PADDING - SELECT_HEIGHT
         const availableWidth = window.innerWidth - 2 * PADDING
-        const scaledCanvasHeight = Math.min(availableHeight, availableWidth * 3 / 4)
-        const scaledCanvasWidth = scaledCanvasHeight * 4 / 3
+        const scaledCanvasHeight = Math.min(
+          availableHeight, availableWidth * canvas.height / canvas.width)
+        const scaledCanvasWidth = scaledCanvasHeight * canvas.width / canvas.height
         canvas.style.width = scaledCanvasWidth + 'px'
         canvas.style.height = scaledCanvasHeight + 'px'
       }
@@ -117,14 +153,27 @@
       }
 
       function setDemo () {
-        const name = window.location.hash.substring(1)
+        let name
+        if (window.location.hash === '') {
+          name = Object.keys(DEMO)[0]
+        } else {
+          name = window.location.hash.substring(1)
+        }
         const bitmaps = DEMO[name]
         const match = name.match(/^.*-(\d+)x(\d+)-font-(.*)$/)
         const fontWidth = match[1]
         const fontHeight = match[2]
         const bitmapType = match[3]
         const demoFunction = bitmapType === 'list' ? fontListDemo : fontMapDemo
+
+        canvas.width = 80 * fontWidth
+        canvas.height = 480
+
+        ctx.fillStyle = '#000'
+        ctx.fillRect(0, 0, canvas.width, canvas.height)
+
         demoFunction(bitmaps, fontWidth, fontHeight)
+        resizeCanvas()
       }
 
       window.addEventListener('load', init)

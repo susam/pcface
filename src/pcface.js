@@ -125,15 +125,16 @@
   }
 
   /**
-   * Return an array of arrays of integers. All nested arrays together
-   * contain consecutive integers from `start` to `stop - 1`. These
-   * integers are split into multiple nested arrays such that each
-   * nested array contains no more than `chunk` number of integers.
-   * For example, calling `pcface.range(65, 78, 5)` returns `[[65, 66,
-   * 67, 68, 69], [70, 71, 72, 73, 74], [75, 76, 77]]`. This array of
-   * arrays can then be passed to {@linkCode
-   * module:pcface.drawStrings} to draw the glyphs represented by
-   * these integers.
+   * Return an array of arrays of integers. This function may be
+   * useful for creating ranges of CP437 character codes for demos.
+   * All nested arrays together contain consecutive integers from
+   * `start` to `stop - 1`. These integers are split into multiple
+   * nested arrays such that each nested array contains no more than
+   * `chunk` number of integers. For example, calling
+   * `pcface.range(65, 78, 5)` returns `[[65, 66, 67, 68, 69], [70,
+   * 71, 72, 73, 74], [75, 76, 77]]`. This array of arrays can then be
+   * passed to {@linkCode module:pcface.drawStrings} to draw the
+   * glyphs represented by these integers.
    *
    * @param {number} start - Start integer.
    * @param {number} stop - Stop integer.

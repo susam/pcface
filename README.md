@@ -1,17 +1,24 @@
 PC Face
 =======
 
-PC Face is a collection of programmer-friendly resources that are
-useful to draw [CP437][CP437WIKI] characters on a graphical canvas.
-This project provides bitmap arrays of all 256 glyphs from the CP437
-character set rendered using a font inspired by IBM PC OEM fonts.
-Additionally, this project includes a script that can be useful to
-generate similar bitmap arrays using other fonts.
+PC Face is a collection of programmer-friendly resources that allow
+drawing [CP437][CP437WIKI] characters on a graphical canvas. This
+project provides bitmap arrays for all 256 glyphs from the CP437
+character set rendered using various IBM PC OEM fonts. Additionally,
+this project includes a [Python script][PY] to generate these bitmaps.
+This script could be useful for generating similar bitmaps for other
+fonts not included in this project. This project also provides a set
+of [JavaScript functions][src/pcface.js] that may be used to render
+the bitmaps on an HTML5 canvas. This set of functions serve as a
+reference of how these bitmaps could be used to render CP437 glyphs in
+other graphical environments.
 
 ![CP437 characters rendered on an HTML5 canvas][CP437IMG]
 
 [CP437WIKI]: https://en.wikipedia.org/wiki/Code_page_437
 [CP437IMG]: https://susam.github.io/blob/img/pcface/pcface-0.2.0.png
+[PY]: src/pcface.py
+[JS]: src/pcface.js
 
 
 Contents
