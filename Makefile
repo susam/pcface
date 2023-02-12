@@ -131,10 +131,10 @@ dist: clean pkgreadme
 	unzip -c dist/*.whl '*/METADATA'
 	unzip -t dist/*.whl
 
-test-upload:
+test-upload: dist
 	venv/bin/twine upload --repository testpypi dist/*
 
-upload:
+upload: dist
 	venv/bin/twine upload dist/*
 
 user-venv: FORCE
@@ -149,19 +149,32 @@ verify-test-upload:
 	$(MAKE) verify-test-sdist
 	$(MAKE) verify-test-bdist
 
-verify-sdist:
-	user-venv/bin/pip3 install --no-binary :all: mintotp
+verify-sdist: user-venv
+	user-venv/bin/pip3 install --no-binary :all: pcface
+	user-venv/bin/python3 -m pcface -h
+	user-venv/bin/pcface -h
 
-verify-bdist:
-	user-venv/bin/pip3 install mintotp
+verify-bdist: user-venv
+	user-venv/bin/pip3 install pcface
+	user-venv/bin/python3 -m pcface -h
+	user-venv/bin/pcface -h
 
 verify-test-sdist: user-venv
 	user-venv/bin/pip3 install \
-	  --index-url https://test.pypi.org/simple/ --no-binary :all: mintotp
+	  --index-url https://test.pypi.org/simple/ \
+	  --extra-index-url https://pypi.org/simple \
+	  --no-binary :all: \
+	  --pre pcface
+	user-venv/bin/python3 -m pcface -h
+	user-venv/bin/pcface -h
 
 verify-test-bdist: user-venv
 	user-venv/bin/pip3 install \
-	  --index-url https://test.pypi.org/simple/ mintotp
+	  --index-url https://test.pypi.org/simple/ \
+	  --extra-index-url https://pypi.org/simple \
+	  --pre pcface
+	user-venv/bin/python3 -m pcface -h
+	user-venv/bin/pcface -h
 
 
 # Font Downloads

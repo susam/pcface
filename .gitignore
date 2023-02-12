@@ -1,5 +1,6 @@
 node_modules/
 venv/
+user-venv/
 dist/
 src/pcface.egg-info/
 __pycache__/

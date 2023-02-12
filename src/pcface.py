@@ -256,9 +256,9 @@ given font.
                         help='font size used to render characters'
                              ' (default: font height specified in'
                              ' output directory name)')
-    parser.add_argument('font_path', nargs='?',
+    parser.add_argument('font_path',
                         help='path to font file')
-    parser.add_argument('output_dir', nargs='?',
+    parser.add_argument('output_dir',
                         help='output directory in path/to/label-WxH format')
     args = parser.parse_args()
     return args
