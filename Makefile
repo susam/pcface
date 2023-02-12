@@ -51,7 +51,7 @@ rmdoc:
 
 pydoc: rmdoc
 	venv/bin/sphinx-quickstart -q -p "PC Face" -a "Susam Pal" doc/sphinx
-	venv/bin/sphinx-apidoc -o doc/sphinx/api src
+	venv/bin/sphinx-apidoc -o doc/sphinx/api src src/test
 	echo "extensions.append('sphinx.ext.napoleon')" >> doc/sphinx/conf.py
 	echo "extensions.append('sphinx.ext.intersphinx')" >> doc/sphinx/conf.py
 	echo >> doc/sphinx/index.rst

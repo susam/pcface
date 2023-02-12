@@ -172,7 +172,7 @@ def make_font_map(chars, bitmaps, const_name):
     return output
 
 
-def cp437chars():
+def cp437():
     """Return all CP437 characters in ascending order.
 
     Returns:
@@ -267,7 +267,7 @@ given font.
 def _main():
     """Generate previews, graphs, and bitmap arrays."""
     args = _parse_arguments()
-    chars = cp437chars()
+    chars = cp437()
 
     # Print CP437 characters if requested.
     if args.cp437:
