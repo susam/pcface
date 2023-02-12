@@ -34,6 +34,12 @@ Perform the following tasks for every release:
     ```
 
   - Optional: Update screenshot of `meta/demo.html` in README.
+  - Publish documentation:
+
+    ```sh
+    make live
+    ```
+
   - Commit changes:
 
     ```sh
@@ -72,12 +78,14 @@ Perform the following tasks after every release:
 
   - Commit.
 
-        git add -p
-        git status
+    ```
+    git add -p
+    git status
 
-        VERSION=$(sed -n 's/.*version.*: "\(.*\)",/\1/p' package.json)
-        echo VERSION: $VERSION
+    VERSION=$(sed -n 's/.*version.*: "\(.*\)",/\1/p' package.json)
+    echo VERSION: $VERSION
 
-        git add -p
-        git commit -em "Set version to $VERSION"
-        git push origin main
+    git add -p
+    git commit -em "Set version to $VERSION"
+    git push origin main
+    ```

@@ -8,10 +8,10 @@ character set rendered using various IBM PC OEM fonts. Additionally,
 this project includes a [Python script][PY] to generate these bitmaps.
 This script could be useful for generating similar bitmaps for other
 fonts not included in this project. This project also provides a set
-of [JavaScript functions][src/pcface.js] that may be used to render
-the bitmaps on an HTML5 canvas. This set of functions serve as a
-reference of how these bitmaps could be used to render CP437 glyphs in
-other graphical environments.
+of [JavaScript functions][JS] that may be used to render the bitmaps
+on an HTML5 canvas. This set of functions serve as a reference of how
+these bitmaps could be used to render CP437 glyphs in other graphical
+environments.
 
 ![CP437 characters rendered on an HTML5 canvas][CP437IMG]
 
@@ -27,6 +27,7 @@ Contents
 * [Resources](#resources)
 * [Bitmap Format](#bitmap-format)
 * [Font Details](#font-details)
+* [API Documentation](#api-documentation)
 * [Credit](#credit)
 * [License](#license)
 * [Support](#support)

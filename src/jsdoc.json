@@ -4,7 +4,7 @@
   },
   "opts": {
     "destination": "doc/js/",
-    "readme": "README.md"
+    "readme": "src/jsdoc.md"
   },
   "plugins": [
     "plugins/markdown"
