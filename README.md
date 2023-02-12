@@ -73,14 +73,13 @@ resource files in each directory.
   prefixed with the binary code of the row represented in hexadecimal.
   The same binary codes appear as comments in the JavaScript files
   mentioned above.
-- [out/moderndos-8x16/preview-8x16.png][]: A preview of all the fonts
-  read from the original font file.
-- [out/moderndos-8x16/preview-16x32.png][]: A larger preview of all
-  the fonts read from the original font file.
+- [out/moderndos-8x16/preview-8x16.png][]: A preview of the font read
+  from the original font file.
+- [out/moderndos-8x16/preview-16x32.png][]: A larger preview of the
+  font read from the original font file.
 
 Similar resource files are available for each such font included in
-this project. Visit [susam.github.io/pcface/out/][OUT] to browse these
-files for all fonts available in this project.
+this project. Visit [susam.github.io/pcface/out/][OUT] to browse them.
 
 [OUT]: https://susam.github.io/pcface/out/
 [out/modern-dos-8x16/fontlist.js]: https://susam.github.io/pcface/out/moderndos-8x16/fontlist.js
@@ -197,12 +196,9 @@ Font Details
 
 This project includes [Modern DOS 8x16][MDOS] font (version
 20190101.02) developed by Jayvee Enaguas. This font is available under
-the terms of [CC0 1.0 Universal Public Domain Dedication][CC0]. A copy
-of the font is also archived in the
-[src/modern-dos/](src/font/modern-dos/) directory of this project.
-
-- [out/preview-8x16.png](out/preview-8x16.png)
-- [out/preview-16x32.png](out/preview-16x32.png)
+the terms of the [CC0 1.0 Universal Public Domain Dedication][CC0]. A
+copy of the font is also archived in the
+[src/font/moderndos/](src/font/moderndos/) directory of this project.
 
 This font is based on the [IBM VGA 8x16][VGA] and [Verite
 8x16][VERITE] OEM fonts for IBM PCs. Some glyphs in this font look
@@ -230,13 +226,15 @@ for the digit 7 from IBM VGA 8x16.
 
 This project includes several [Oldschool PC][OLDSCHOOL] fonts (version
 2.2) developed by VileR. These fonts are available terms of [Creative
-Commons Attribution-ShareAlike 4.0 International License][CCBYSA]
+Commons Attribution-ShareAlike 4.0 International License][CCBYSA].
+Copies of these fonts are also archived in the
+[src/font/oldschool/](src/font/oldschool/) directory of this project.
 
 These fonts do an excellent job of reproducing the original IBM PC OEM
 fonts as faithfully as possible. However, these fonts also differ from
 the original OEM fonts in minor ways, especially, to correct minor
 errors in the original fonts. See the FAQ at the [Oldschool PC
-Documentation][OLDSCHOOLDOC] for more details about this.
+Documentation][OLDSCHOOLDOC] for more details about these corrections.
 
 [OLDSCHOOL]: https://int10h.org/oldschool-pc-fonts/fontlist/
 [OLDSCHOOLDOC]: https://int10h.org/oldschool-pc-fonts/readme/
@@ -247,10 +245,9 @@ API Documentation
 -----------------
 
 While the primary purpose of this project is to distribute bitmap
-arrays for CP437 glyphs, this project also makes some of its scripts
-that went into generating and testing the bitmaps as Python and
-JavaScript functions. The documentation for these functions can be
-found here:
+arrays for CP437 glyphs, this project also makes some of the work that
+went into generating and testing the bitmaps as Python and JavaScript
+functions. The documentation for these functions can be found here:
 
 - [Python API Documentation][PYDOC]
 - [JavaScript API Documentation][JSDOC]
@@ -286,14 +283,43 @@ TODO
 License
 -------
 
-This is free and open source software. You can use, copy, modify,
-merge, publish, distribute, sublicense, and/or sell copies of it,
-under the terms of the MIT License. See [LICENSE.md][L] for details.
+The original fonts archived in this project are available under the
+terms of the orignal licenses chosen by the font developers, i.e.,
 
-This software is provided "AS IS", WITHOUT WARRANTY OF ANY KIND,
-express or implied. See [LICENSE.md][L] for details.
+- [src/font/moderndos/](src/font/moderndos/) is available under the
+  terms of the [CC0 1.0 Universal Public Domain Dedication][CC0];
+- [src/font/oldschool/](src/font/oldschool/) is available under the
+  terms of the [Creative Commons Attribution-ShareAlike 4.0
+  International License][CCBYSA].
+
+You may use the content of the following directory under the terms of
+either the [MIT License][L] or the [CC0 1.0 Universal Public Domain
+Dedication][CC0]:
+
+- [out/out/moderndos-8x16/](out/out/moderndos-8x16/)
+
+You may use the content of the following directory under the terms of
+either the [GNU General Public License v3][GPL] or the [Creative
+Commons Attribution-ShareAlike 4.0 International License][CCBYSA]:
+
+- [out/oldschool-bios-8x8/](out/oldschool-bios-8x8/)
+- [out/oldschool-cga-8x8/](out/oldschool-cga-8x8/)
+- [out/oldschool-ega-8x14/](out/oldschool-ega-8x14/)
+- [out/oldschool-mda-9x14/](out/oldschool-mda-9x14/)
+- [out/oldschool-model30-8x16/](out/oldschool-model30-8x16/)
+- [out/oldschool-pgc-8x16/](out/oldschool-pgc-8x16/)
+- [out/oldschool-verite-8x16/](out/oldschool-verite-8x16/)
+- [out/oldschool-vga-8x16/](out/oldschool-vga-8x16/)
+- [out/oldschool-vga-9x14/](out/oldschool-vga-9x14/)
+- [out/oldschool-vga-9x16/](out/oldschool-vga-9x16/)
+- [src/demo.html](src/demo.html)
+
+All other files in this project, excluding the ones listed in the
+three lists above, are available under the terms of the of the MIT
+License. See [LICENSE.md][L] for the complete license text.
 
 [L]: LICENSE.md
+[GPL]: https://www.gnu.org/licenses/gpl-3.0.html
 
 
 Support
