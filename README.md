@@ -12,20 +12,15 @@ original IBM PC OEM fonts.
 [CP437WIKI]: https://en.wikipedia.org/wiki/Code_page_437
 [CP437IMG]: https://susam.github.io/blob/img/pcface/pcface-0.2.0.png
 
-Additionally, this project includes a [Python script][PY] to generate
-these bitmaps. This script could be useful for generating similar
-bitmaps for other fonts not included in this project. This project
-also provides a set of [JavaScript functions][JS] that may be used to
-render the bitmaps on an HTML5 canvas. This set of functions serve as
-a reference for how these bitmaps could be used to render CP437 glyphs
-in other graphical environments. More about this is discussed in the
-sections below.
+Additionally, this project includes a few Python functions to generate
+these bitmaps and a few JavaScript functions that demonstrate how to
+render these bitmaps on a graphical canvas.
 
-Visit [susam.github.io/pcface/demo][DEMO] to see a demo.
+Visit [susam.github.io/pcface/src/demo.html][DEMO] to see a demo.
 
 [PY]: src/pcface.py
 [JS]: src/pcface.js
-[DEMO]: https://susam.github.io/pcface/demo/
+[DEMO]: https://susam.github.io/pcface/src/demo.html
 
 
 Contents
@@ -37,10 +32,9 @@ Contents
 * [Font Details](#font-details)
   * [Modern DOS Font](#modern-dos-font)
   * [Oldschool PC Fonts](#oldschool-pc-fonts)
-* [API Documentation](#api-documentation)
-* [API Usage](#api-usage)
+* [Toolkit Usage](#toolkit-usage)
+  * [CLI Tool](#cli-tool)
   * [Python API](#python-api)
-  * [Python Tool](#python-tool)
   * [JavaScript API](#javascript-api)
 * [License](#license)
   * [Original Fonts](#original-fonts)
@@ -55,36 +49,35 @@ Contents
 Resources
 ---------
 
-There are a number of resource files provided in the [out/](out/)
-directory of this project. Visit [susam.github.io/pcface/out/][OUT] to
-browse these resources. The directory at this URL contains
-subdirectories for various free fonts based on the original IBM PC OEM
-fonts. Each font directory contains a number of resources. Links to
+There are a number of files provided in the [out/](out/) directory of
+this project. Visit [susam.github.io/pcface/out/][OUT] to browse these
+files. This directory contains several subdirectories for various free
+fonts based on the original IBM PC OEM fonts. Each font directory
+contains bitmap arrays for the font and a few other files. Links to
 modern-dos-8x16 resource files are provided below as examples while
-describing these resources. Here is a brief description of the
-resource files in each directory.
+describing these resources. Here is a brief description of each file:
 
-- [out/modern-dos-8x16/fontlist.js][]: Bitmap representation of all
-  256 glyphs from the CP437 character set exposed as a JavaScript
-  array of bitmap arrays. Each bitmap array represents the bitmap of a
-  CP437 character.
-- [out/moderndos-8x16/fontmap.js][]: Bitmap representation of all
-  CP437 glyphs from the CP437 character set exposed as a JavaScript
-  object that maps each CP437 character to its bitmap array.
-- [out/moderndos-8x16/glyph.txt][]: All CP437 glyphs represented using
-  asterisks.
-- [out/moderndos-8x16/graph.txt][]: All CP437 glyphs represented using
-  the at symbol (`@`) and dots (`.`). Each row of the glyph is
-  prefixed with the binary code of the row represented in hexadecimal.
-  The same binary codes appear as comments in the JavaScript files
-  mentioned above.
-- [out/moderndos-8x16/preview-8x16.png][]: A preview of the font read
-  from the original font file.
-- [out/moderndos-8x16/preview-16x32.png][]: A larger preview of the
-  font read from the original font file.
+  - [out/modern-dos-8x16/fontlist.js][]: Bitmap representation of all
+    256 glyphs from the CP437 character set exposed as a JavaScript
+    array of bitmap arrays. Each bitmap array represents the bitmap of
+    a CP437 character.
+  - [out/moderndos-8x16/fontmap.js][]: Bitmap representation of all
+    CP437 glyphs from the CP437 character set exposed as a JavaScript
+    object that maps each CP437 character to its bitmap array.
+  - [out/moderndos-8x16/glyph.txt][]: All CP437 glyphs represented
+    using asterisks.
+  - [out/moderndos-8x16/graph.txt][]: All CP437 glyphs represented
+    using the at symbol (`@`) and dots (`.`). Each row of the glyph is
+    prefixed with the binary code of the row represented in
+    hexadecimal. The same binary codes appear as comments in the
+    JavaScript files mentioned above.
+  - [out/moderndos-8x16/preview-8x16.png][]: A preview of the font
+    read from the original font file.
+  - [out/moderndos-8x16/preview-16x32.png][]: A larger preview of the
+    font read from the original font file.
 
-Similar resource files are available for each such font included in
-this project. Visit [susam.github.io/pcface/out/][OUT] to browse them.
+Similar files are available for each such font included in this
+project. Visit [susam.github.io/pcface/out/][OUT] to browse them.
 
 [OUT]: https://susam.github.io/pcface/out/
 [out/modern-dos-8x16/fontlist.js]: https://susam.github.io/pcface/out/moderndos-8x16/fontlist.js
@@ -102,9 +95,9 @@ Demo
 ----
 
 For a quick demo of the various bitmaps available in this project,
-visit the demo page at [susam.github.io/pcface/demo/][DEMO]. There is
-a dropdown menu at the bottom that can be used to select bitmaps for
-different fonts.
+visit the demo page at [susam.github.io/pcface/src/demo.html][DEMO].
+There is a dropdown menu at the bottom that can be used to select
+bitmaps for different fonts.
 
 In the demo page, you would notice that each bitmap demo comes in two
 variants: one with the suffix `font-list` and another with the suffix
@@ -246,43 +239,205 @@ Documentation][OLDSCHOOLDOC] for more details about these corrections.
 [CCBYSA]: https://creativecommons.org/licenses/by-sa/4.0/
 
 
-API Documentation
------------------
+Toolkit Usage
+-------------
 
 While the primary purpose of this project is to distribute bitmap
 arrays for CP437 glyphs, this project also makes some of the work that
 went into generating and testing the bitmaps as Python and JavaScript
-functions. The documentation for these functions can be found here:
-
-- [Python API Documentation][PYDOC]
-- [JavaScript API Documentation][JSDOC]
-
-[PYDOC]: https://susam.github.io/pcface/doc/py/api/pcface.html
-[JSDOC]: https://susam.github.io/pcface/doc/js/module-pcface.html
+functions. The Python functions are also packaged in the form of a
+command-line interface (CLI) tool. The following subsections provide a
+brief introduction to the CLI tool as well as the Python and
+JavaScript functions.
 
 
-API Usage
----------
+### CLI
 
-The subsections in this section provide a very brief introduction to
-how to get started with the Python and JavaScript functions exposed by
-this project. For a detailed account of what each function does, refer
-to the API documentation links provided in the previous section.
+The Python command line interface (CLI) tool that this project
+provides can be used to generate your own bitmap arrays for CP437
+glyphs with a font of your choice. The following steps explain how we
+can do this using the Oldschool IBM EGA 9x14 font, a font that is not
+included in this project.
+
+ 1. First download and extract the font file for Oldschool IBM EGA
+    9x14:
+
+    ```sh
+    curl -o oldschool.zip https://int10h.org/oldschool-pc-fonts/download/oldschool_pc_font_pack_v2.2_FULL.zip
+    unzip -j oldschool.zip "ttf - Px (pixel outline)/Px437_IBM_EGA_9x14.ttf"
+    ```
+
+ 2. Create a virtual Python environment and install PC Face:
+
+    ```sh
+    python3 -m venv venv
+    venv/bin/pip3 install pcface
+    ```
+
+ 3. Enter the following command to print the usage details of the tool:
+
+    ```sh
+    venv/bin/pcface -h
+    ```
+
+ 4. Create bitmap arrays and other output files:
+
+    ```sh
+    venv/bin/pcface -s 16 Px437_IBM_EGA_9x14.ttf oldschool-ega-9x14/
+    ```
+
+    Note that the output directory name must end with the dimension of
+    each output glyph expressed in `WxH` format where `W` is the width
+    of each glyph and `H` is the height of each glyph. The `-s` option
+    specifies the font size. It should be set to the font size that
+    leads to glyphs of the desired dimension. If the `-s` option is
+    omitted, a font size of `H` is used where `H` is the glyph height
+    read from the output directory name which may not always produce
+    the correct glyph dimension.
+
+ 5. Now create bitmap arrays for the same font but with the glyph
+    width and height doubled:
+
+    ```sh
+    venv/bin/pcface -s 32 Px437_IBM_EGA_9x14.ttf oldschool-ega-18x28/
+    ```
+
+The output directories would now contain JavaScript files containing
+the bitmap arrays as well as a few other files that illustrate the
+glyphs. See section [Resources](#resources) for a brief description of
+these files.
 
 
 ### Python API
 
-TODO
+The following steps shows how to get started with the Python API:
 
+ 1. First download and extract the font file for Oldschool IBM EGA
+    9x14:
 
-### Python Tool
+    ```sh
+    curl -o oldschool.zip https://int10h.org/oldschool-pc-fonts/download/oldschool_pc_font_pack_v2.2_FULL.zip
+    unzip -j oldschool.zip "ttf - Px (pixel outline)/Px437_IBM_EGA_9x14.ttf"
+    ```
 
-TODO
+ 2. Create a virtual Python environment and install PC Face:
+
+    ```sh
+    python3 -m venv venv
+    venv/bin/pip3 install pcface
+    ```
+
+ 3. Now write this Python script and save it in a file, say, `ex1.py`.
+
+    ```python
+    import pcface
+
+    bitmap = pcface.make_bitmap('A', 'Px437_IBM_EGA_9x14.ttf', 16, 9, 14)
+    graph = pcface.make_graph(bitmap, 9, '.@', False)
+    print(graph)
+    ```
+
+ 4. Enter the following command to execute the script:
+
+    ```sh
+    venv/bin/python3 ex1.py
+    ```
+
+    The following output should appear:
+
+    ```
+    .........
+    .........
+    ...@.....
+    ..@@@....
+    .@@.@@...
+    @@...@@..
+    @@...@@..
+    @@@@@@@..
+    @@...@@..
+    @@...@@..
+    @@...@@..
+    .........
+    .........
+    .........
+    ```
+
+See [src/example/](src/example/) for more examples of Python scripts
+that invoke the Python API of this project.
+
+Also, see [Python API Documentation][PYDOC] for complete documentation
+of all the functions exposed in the Python API.
 
 
 ### JavaScript API
 
-TODO
+Here is a minimal HTML example that shows how PC Face and a font map
+can be loaded in a web page and used:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PC Face Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <style>
+      body {background: #111}
+      canvas {background: #000; image-rendering: pixelated; margin: auto; display: block}
+    </style>
+    <script src="https://susam.github.io/pcface/src/pcface.js"></script>
+    <script src="https://susam.github.io/pcface/out/moderndos-8x16/fontmap.js"></script>
+    <script>
+      'use strict'
+      window.addEventListener('load', function () {
+        const canvas = document.getElementById('canvas')
+        const ctx = canvas.getContext('2d')
+        ctx.fillStyle = '#3f3'
+        pcface.drawString(PC_FACE_MODERNDOS_8X16_FONT_MAP, ctx, 8, "hello, world", 0, 0, 2)
+      })
+    </script>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+  </body>
+</html>
+```
+
+Here is another example that loads a font list instead of a font map:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PC Face Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <style>
+      body {background: #111}
+      canvas {background: #000; image-rendering: pixelated; margin: auto; display: block}
+    </style>
+    <script src="https://susam.github.io/pcface/src/pcface.js"></script>
+    <script src="https://susam.github.io/pcface/out/moderndos-8x16/fontlist.js"></script>
+    <script>
+      'use strict'
+      window.addEventListener('load', function () {
+        const canvas = document.getElementById('canvas')
+        const ctx = canvas.getContext('2d')
+        ctx.fillStyle = '#3f3'
+        pcface.drawString(PC_FACE_MODERNDOS_8X16_FONT_LIST, ctx, 8,
+                          [65, 32, 61, 32, 227, 114, 253], 0, 0, 2)
+      })
+    </script>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+  </body>
+</html>
+```
+
+See [JavaScript API Documentation][JSDOC] for complete documentation
+of all the functions exposed in the JavaScript API.
+
+[PYDOC]: https://susam.github.io/pcface/doc/py/api/pcface.html
+[JSDOC]: https://susam.github.io/pcface/doc/js/module-pcface.html
 
 
 License
@@ -293,11 +448,11 @@ License
 The original fonts archived in this project are available under the
 terms of the orignal licenses chosen by the font developers, i.e.,
 
-- [src/font/moderndos/](src/font/moderndos/) is available under the
-  terms of the [CC0 1.0 Universal Public Domain Dedication][CC0];
-- [src/font/oldschool/](src/font/oldschool/) is available under the
-  terms of the [Creative Commons Attribution-ShareAlike 4.0
-  International License][CCBYSA].
+  - [src/font/moderndos/](src/font/moderndos/) is available under the
+    terms of the [CC0 1.0 Universal Public Domain Dedication][CC0];
+  - [src/font/oldschool/](src/font/oldschool/) is available under the
+    terms of the [Creative Commons Attribution-ShareAlike 4.0
+    International License][CCBYSA].
 
 
 ### Modern DOS Bitmaps
@@ -306,7 +461,7 @@ You may use the content of the following directory under the terms of
 either the [MIT License][L] or the [CC0 1.0 Universal Public Domain
 Dedication][CC0]:
 
-- [out/out/moderndos-8x16/](out/out/moderndos-8x16/)
+  - [out/out/moderndos-8x16/](out/out/moderndos-8x16/)
 
 [L]: LICENSE.md
 
@@ -317,17 +472,17 @@ You may use the content of the following directory under the terms of
 either the [GNU General Public License v3][GPL] or the [Creative
 Commons Attribution-ShareAlike 4.0 International License][CCBYSA]:
 
-- [out/oldschool-bios-8x8/](out/oldschool-bios-8x8/)
-- [out/oldschool-cga-8x8/](out/oldschool-cga-8x8/)
-- [out/oldschool-ega-8x14/](out/oldschool-ega-8x14/)
-- [out/oldschool-mda-9x14/](out/oldschool-mda-9x14/)
-- [out/oldschool-model30-8x16/](out/oldschool-model30-8x16/)
-- [out/oldschool-pgc-8x16/](out/oldschool-pgc-8x16/)
-- [out/oldschool-verite-8x16/](out/oldschool-verite-8x16/)
-- [out/oldschool-vga-8x16/](out/oldschool-vga-8x16/)
-- [out/oldschool-vga-9x14/](out/oldschool-vga-9x14/)
-- [out/oldschool-vga-9x16/](out/oldschool-vga-9x16/)
-- [src/demo.html](src/demo.html)
+  - [out/oldschool-bios-8x8/](out/oldschool-bios-8x8/)
+  - [out/oldschool-cga-8x8/](out/oldschool-cga-8x8/)
+  - [out/oldschool-ega-8x14/](out/oldschool-ega-8x14/)
+  - [out/oldschool-mda-9x14/](out/oldschool-mda-9x14/)
+  - [out/oldschool-model30-8x16/](out/oldschool-model30-8x16/)
+  - [out/oldschool-pgc-8x16/](out/oldschool-pgc-8x16/)
+  - [out/oldschool-verite-8x16/](out/oldschool-verite-8x16/)
+  - [out/oldschool-vga-8x16/](out/oldschool-vga-8x16/)
+  - [out/oldschool-vga-9x14/](out/oldschool-vga-9x14/)
+  - [out/oldschool-vga-9x16/](out/oldschool-vga-9x16/)
+  - [src/demo.html](src/demo.html)
 
 [GPL]: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -353,12 +508,12 @@ Channels
 
 The author of this project hangs out at the following places online:
 
-- Website: [susam.net](https://susam.net)
-- Twitter: [@susam](https://twitter.com/susam)
-- Mastodon: [@susam@mastodon.social](https://mastodon.social/@susam)
-- GitHub: [@susam](https://github.com/susam)
-- Matrix: [#susam:matrix.org](https://app.element.io/#/room/#susam:matrix.org)
-- IRC: [#susam:libera.chat](https://web.libera.chat/#susam)
+  - Website: [susam.net](https://susam.net)
+  - Twitter: [@susam](https://twitter.com/susam)
+  - Mastodon: [@susam@mastodon.social](https://mastodon.social/@susam)
+  - GitHub: [@susam](https://github.com/susam)
+  - Matrix: [#susam:matrix.org](https://app.element.io/#/room/#susam:matrix.org)
+  - IRC: [#susam:libera.chat](https://web.libera.chat/#susam)
 
 You are welcome to subscribe to, follow, or join one or more of the
 above channels to receive updates from the author or ask questions

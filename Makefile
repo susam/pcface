@@ -68,9 +68,11 @@ jsdoc: rmdoc
 	echo 'Documentation available at doc/js/index.html'
 
 clean:
+	find . -name "__pycache__" -exec rm -r {} +
+	find . -name "*.pyc" -exec rm {} +
 	rm -rf *.pyc __pycache__
 	rm -rf .coverage htmlcov
-	rm -rf dist/ src/pcface.egg-info/
+	rm -rf doc/ dist/ src/pcface.egg-info/
 
 preview-all:
 	venv/bin/python3 src/preview.py
@@ -83,14 +85,13 @@ preview-char:
 
 
 # Publish demos and documentation
-stage: doc
+stage: clean doc
 	rm -rf _site/ && mkdir -p _site/demo/
 	touch _site/.nojekyll
 	cp -R out/ _site/out/
 	cp -R doc/ _site/doc/
-	cp src/pcface.js _site/demo/pcface.js
-	cp src/demo.html _site/demo/index.html
-	cp src/minidemo.html _site/demo/minidemo.html
+	make clean
+	cp -R src/ _site/src/
 
 site: stage
 	sbcl --eval '(defvar *index* "index.html")' --load src/index.lisp --quit
