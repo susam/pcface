@@ -53,13 +53,6 @@ Perform the following tasks for every release:
     git push
     ```
 
-  - Publish Python package.
-
-    ```sh
-    make upload
-    make verify-upload
-    ```
-
   - Tag the release:
 
     ```sh
@@ -68,6 +61,13 @@ Perform the following tasks for every release:
     git commit -em "Set version to $VERSION"
     git tag $VERSION -m "PC Face $VERSION"
     git push origin main $VERSION
+    ```
+
+  - Publish Python package.
+
+    ```sh
+    make upload
+    make verify-upload
     ```
 
   - Publish JavaScript package.
