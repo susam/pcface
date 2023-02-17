@@ -8,6 +8,8 @@ import sys
 
 from PIL import Image, ImageDraw, ImageFont
 
+__version__ = '0.3.0'
+
 
 def make_bitmap(char, path, size, width, height):
     """Create bitmap for a given character.
@@ -256,9 +258,11 @@ given font.
                         help='font size used to render characters'
                              ' (default: font height specified in'
                              ' output directory name)')
-    parser.add_argument('font_path',
+    parser.add_argument('-v', '--version', action='version',
+                        version='%(prog)s ' + __version__)
+    parser.add_argument('font_path', nargs='?',
                         help='path to font file')
-    parser.add_argument('output_dir',
+    parser.add_argument('output_dir', nargs='?',
                         help='output directory in path/to/label-WxH format')
     args = parser.parse_args()
     return args

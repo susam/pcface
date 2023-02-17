@@ -1,6 +1,6 @@
 [project]
 name = "pcface"
-version = "0.3.0-dev5"
+dynamic = ["version"]
 description = "PC Face - Bitmap arrays for all 256 glyphs of CP437"
 readme = "src/pypi.md"
 license = {text = "MIT"}
@@ -34,3 +34,13 @@ pcface = "pcface:main"
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = ["pcface"]
+
+[tool.setuptools.dynamic]
+version = {attr = "pcface.__version__"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["pcface"]

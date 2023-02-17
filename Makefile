@@ -39,10 +39,8 @@ test:
 	venv/bin/python3 -m unittest discover -v -t src -s src.test
 	npm test
 
-checks: cp437 lint test
+checks: clean cp437 lint test
 	rm -f pcface*.tgz
-	npm pack
-	tar -tvf pcface*.tgz
 
 doc: pydoc jsdoc
 
@@ -72,7 +70,8 @@ clean:
 	find . -name "*.pyc" -exec rm {} +
 	rm -rf *.pyc __pycache__
 	rm -rf .coverage htmlcov
-	rm -rf doc/ dist/ src/pcface.egg-info/
+	rm -rf pcface*.tgz
+	rm -rf user-venv/ doc/ dist/ src/pcface.egg-info/
 
 preview-all:
 	venv/bin/python3 src/preview.py
@@ -84,9 +83,11 @@ preview-char:
 	xdg-open out/preview-B.png || open out/preview-B.png
 
 
-# Publish demos and documentation
+# Publish Doc and Demo
+# --------------------
+
 stage: clean doc
-	rm -rf _site/ && mkdir -p _site/demo/
+	rm -rf _site/ && mkdir -p _site/
 	touch _site/.nojekyll
 	cp -R out/ _site/out/
 	cp -R doc/ _site/doc/
@@ -120,6 +121,10 @@ pushlive:
 # Distribution Targets
 # --------------------
 
+npmdist: clean
+	npm pack
+	tar -tvf pcface*.tgz
+
 pkgreadme:
 	sed -n '1,/^.CP437IMG./p' README.md > src/pypi.md
 	echo >> src/pypi.md
@@ -131,6 +136,7 @@ dist: clean pkgreadme
 	venv/bin/twine check dist/*
 	unzip -c dist/*.whl '*/METADATA'
 	unzip -t dist/*.whl
+	tar -tvf dist/*.tar.gz
 
 test-upload: dist
 	venv/bin/twine upload --repository testpypi dist/*
@@ -152,13 +158,11 @@ verify-test-upload:
 
 verify-sdist: user-venv
 	user-venv/bin/pip3 install --no-binary :all: pcface
-	user-venv/bin/python3 -m pcface -h
-	user-venv/bin/pcface -h
+	make verify-pcface
 
 verify-bdist: user-venv
 	user-venv/bin/pip3 install pcface
-	user-venv/bin/python3 -m pcface -h
-	user-venv/bin/pcface -h
+	make verify-pcface
 
 verify-test-sdist: user-venv
 	user-venv/bin/pip3 install \
@@ -166,16 +170,19 @@ verify-test-sdist: user-venv
 	  --extra-index-url https://pypi.org/simple \
 	  --no-binary :all: \
 	  --pre pcface
-	user-venv/bin/python3 -m pcface -h
-	user-venv/bin/pcface -h
+	make verify-pcface
 
 verify-test-bdist: user-venv
 	user-venv/bin/pip3 install \
 	  --index-url https://test.pypi.org/simple/ \
 	  --extra-index-url https://pypi.org/simple \
 	  --pre pcface
-	user-venv/bin/python3 -m pcface -h
-	user-venv/bin/pcface -h
+	make verify-pcface
+
+verify-pcface:
+	user-venv/bin/python3 -c 'import pcface; print(pcface.__version__)'
+	user-venv/bin/python3 -m pcface -v
+	user-venv/bin/pcface -v
 
 
 # Font Downloads

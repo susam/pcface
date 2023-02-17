@@ -33,7 +33,7 @@ Contents
   * [Modern DOS Font](#modern-dos-font)
   * [Oldschool PC Fonts](#oldschool-pc-fonts)
 * [Toolkit Usage](#toolkit-usage)
-  * [CLI Tool](#cli-tool)
+  * [CLI](#cli)
   * [Python API](#python-api)
   * [JavaScript API](#javascript-api)
 * [License](#license)
@@ -244,10 +244,10 @@ Toolkit Usage
 
 While the primary purpose of this project is to distribute bitmap
 arrays for CP437 glyphs, this project also makes some of the work that
-went into generating and testing the bitmaps as Python and JavaScript
-functions. The Python functions are also packaged in the form of a
-command-line interface (CLI) tool. The following subsections provide a
-brief introduction to the CLI tool as well as the Python and
+went into generating and testing these bitmaps as Python and
+JavaScript functions. The Python functions are also packaged in the
+form of a command-line interface (CLI) tool. The following subsections
+provide a brief introduction to the CLI tool as well as the Python and
 JavaScript functions.
 
 

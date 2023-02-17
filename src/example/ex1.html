@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PC Face Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <style>
+      body {background: #111}
+      canvas {background: #000; image-rendering: pixelated; margin: auto; display: block}
+    </style>
+    <script src="https://susam.github.io/pcface/src/pcface.js"></script>
+    <script src="https://susam.github.io/pcface/out/moderndos-8x16/fontmap.js"></script>
+    <script>
+      'use strict'
+      window.addEventListener('load', function () {
+        const canvas = document.getElementById('canvas')
+        const ctx = canvas.getContext('2d')
+        ctx.fillStyle = '#3f3'
+        pcface.drawString(PC_FACE_MODERNDOS_8X16_FONT_MAP, ctx, 8, "hello, world", 0, 0, 2)
+      })
+    </script>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+  </body>
+</html>

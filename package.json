@@ -1,6 +1,6 @@
 {
   "name": "pcface",
-  "version": "0.3.0-dev",
+  "version": "0.3.0",
   "description": "PC Face - Bitmap arrays for all 256 glyphs of CP437",
   "files": [
     "src/*.html",

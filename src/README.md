@@ -23,14 +23,19 @@ Release Checklist
 
 Perform the following tasks for every release:
 
-  - Update version in README.md
   - Update version in package.json.
+  - Update version in src/pcface.py
   - Update copyright notice in LICENSE.md
   - Update CHANGES.md
+  - Optional: Update screenshot in README.md
   - Run checks:
 
     ```sh
     make checks
+    make dist
+    make npmdist
+    make test-upload
+    make verify-test-upload
     ```
 
   - Optional: Update screenshot of `meta/demo.html` in README.
@@ -46,9 +51,16 @@ Perform the following tasks for every release:
     git status; git add -p
     ```
 
+  - Publish Python package.
+
+    ```sh
+    make upload
+    make verify-upload
+    ```
+
   - Tag the release:
 
-    ```
+    ```sh
     VERSION=<VERSION>
 
     git commit -em "Set version to $VERSION"
@@ -56,18 +68,9 @@ Perform the following tasks for every release:
     git push origin main $VERSION
     ```
 
-  - Publish Python package.
-
-    ```
-    make dist
-    make test-upload
-    make verify-test-upload
-    make upload
-    make verify-upload
-
   - Publish JavaScript package.
 
-    ```
+    ```sh
     npm login
     npm publish
     ```
