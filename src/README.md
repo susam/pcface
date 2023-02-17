@@ -48,7 +48,9 @@ Perform the following tasks for every release:
   - Commit changes:
 
     ```sh
-    git status; git add -p
+    git status
+    git add -p
+    git push
     ```
 
   - Publish Python package.
