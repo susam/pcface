@@ -310,7 +310,7 @@ these files.
 
 ### Python API
 
-The following steps shows how to get started with the Python API:
+The following steps show how to get started with the Python API:
 
  1. First download and extract the font file for Oldschool IBM EGA
     9x14:
