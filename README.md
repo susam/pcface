@@ -16,6 +16,13 @@ Additionally, this project includes a few Python functions to generate
 these bitmaps and a few JavaScript functions that demonstrate how to
 render these bitmaps on a graphical canvas.
 
+Perhaps you are making a retro-style game where you want to take full
+control of what each pixel should be. Or perhaps you want to render
+CP437 glyphs using asterisks to make a text banner. The bitmap arrays
+provided in this project might turn out to be useful for such
+activities. The available bitmap arrays can be translated to pixels on
+screen or symbols for standard output to render CP437 glyphs.
+
 Visit [susam.github.io/pcface/src/demo.html][DEMO] to see a demo.
 
 [PY]: src/pcface.py
