@@ -223,9 +223,9 @@ for the digit 7 from IBM VGA 8x16.
 ### Oldschool PC Fonts
 
 This project includes several [Oldschool PC][OLDSCHOOL] fonts (version
-2.2) developed by VileR. These fonts are available terms of [Creative
-Commons Attribution-ShareAlike 4.0 International License][CCBYSA].
-Copies of these fonts are also archived in the
+2.2) developed by VileR. These fonts are available under the terms of
+[Creative Commons Attribution-ShareAlike 4.0 International
+License][CCBYSA]. Copies of these fonts are also archived in the
 [src/font/oldschool/](src/font/oldschool/) directory of this project.
 
 These fonts do an excellent job of reproducing the original IBM PC OEM
