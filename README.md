@@ -28,13 +28,16 @@ Visit [susam.github.io/pcface/src/demo.html][DEMO] to see a demo.
 [PY]: src/pcface.py
 [JS]: src/pcface.js
 [DEMO]: https://susam.github.io/pcface/src/demo.html
+[RETRO]: https://susam.github.io/pcface/src/retro.html
 
 
 Contents
 --------
 
 * [Resources](#resources)
-* [Demo](#demo)
+* [Demos](#demos)
+  * [Quick Demo](#quick-demo)
+  * [Detailed Demo](#detailed-demo)
 * [Bitmap Format](#bitmap-format)
 * [Font Details](#font-details)
   * [Modern DOS Font](#modern-dos-font)
@@ -98,25 +101,47 @@ These files are also available via CDN at
 [out/moderndos-8x16/preview-8x16.png]: https://susam.github.io/pcface/out/moderndos-8x16/preview-8x16.png
 
 
-Demo
-----
+Demos
+-----
+
+### Quick Demo
 
 For a quick demo of the various bitmaps available in this project,
 visit the demo page at [susam.github.io/pcface/src/demo.html][DEMO].
 There is a dropdown menu at the bottom that can be used to select
 bitmaps for different fonts.
 
-In the demo page, you would notice that each bitmap demo comes in two
-variants: one with the suffix `font-list` and another with the suffix
-`font-map`. The `font-list` demo loads `fontlist.js` of the chosen
-font and renders the glyphs in green. The `font-map` demo loads
-`fontmap.js` of the chosen font and renders the glyphs in amber. The
-rendered glyphs look exactly the same in both demos because the same
-bitmap arrays are used in both cases. The only difference between
+This demo exercises both a font list from `fontlist.js` and a font map
+from `fontmap.js` for the selected font. The font list demo is shown
+in the first canvas using green foreground colour. The font map demo
+is shown in the second canvas using amber colour.
+
+The rendered glyphs look exactly the same in both demos because the
+same bitmap arrays are used in both cases. The only difference between
 `fontlist.js` and `fontmap.js` is how these bitmap arrays are exposed
 in a JavaScript `const`. The former exposes an array of bitmap arrays
 whereas the latter exposes an object that maps each CP437 character to
 its bitmap array.
+
+
+### Detailed Demo
+
+There is another slightly more detailed demo available at
+[susam.github.io/pcface/src/retro.html][RETRO].
+
+In the demo page, you would notice that each bitmap demo comes in two
+variants: one with the suffix `font-list` and another with the suffix
+`font-map`. The `font-list` demo loads `fontlist.js` of the chosen
+font and renders the glyphs in green. The `font-map` demo loads
+`fontmap.js` of the chosen font and renders the glyphs in amber.
+
+While the previous demo shows only 40 characters per line on a fixed
+size canvas with a single font size that equals the original font size
+scaled up twice, this demo shows 80 characters per line in two
+different font sizes: original font size as well as a scaled up font
+size that is twice the original font size. Further, in this demo, the
+canvas automatically resizes itself to fit the browser window size
+whenever the browser is resized.
 
 
 Bitmap Format
@@ -490,6 +515,7 @@ Commons Attribution-ShareAlike 4.0 International License][CCBYSA]:
   - [out/oldschool-vga-9x14/](out/oldschool-vga-9x14/)
   - [out/oldschool-vga-9x16/](out/oldschool-vga-9x16/)
   - [src/demo.html](src/demo.html)
+  - [src/retro.html](src/retro.html)
 
 [GPL]: https://www.gnu.org/licenses/gpl-3.0.html
 
