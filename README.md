@@ -86,6 +86,9 @@ describing these resources. Here is a brief description of each file:
 Similar files are available for each such font included in this
 project. Visit [susam.github.io/pcface/out/][OUT] to browse them.
 
+These files are also available via CDN at
+<https://cdn.jsdelivr.net/npm/pcface/out/>.
+
 [OUT]: https://susam.github.io/pcface/out/
 [out/modern-dos-8x16/fontlist.js]: https://susam.github.io/pcface/out/moderndos-8x16/fontlist.js
 [out/moderndos-8x16/fontmap.js]: https://susam.github.io/pcface/out/moderndos-8x16/fontmap.js
@@ -93,9 +96,6 @@ project. Visit [susam.github.io/pcface/out/][OUT] to browse them.
 [out/moderndos-8x16/graph.txt]: https://susam.github.io/pcface/out/moderndos-8x16/graph.txt
 [out/moderndos-8x16/preview-16x32.png]: https://susam.github.io/pcface/out/moderndos-8x16/preview-16x32.png
 [out/moderndos-8x16/preview-8x16.png]: https://susam.github.io/pcface/out/moderndos-8x16/preview-8x16.png
-
-These resource files are also available via CDN at
-<https://cdn.jsdelivr.net/npm/pcface/out/>.
 
 
 Demo
@@ -379,7 +379,7 @@ of all the functions exposed in the Python API.
 ### JavaScript API
 
 Here is a minimal HTML example that shows how PC Face and a font map
-can be loaded in a web page and used:
+can be loaded from a CDN into a web page and used:
 
 ```html
 <!DOCTYPE html>
@@ -391,8 +391,8 @@ can be loaded in a web page and used:
       body {background: #111}
       canvas {background: #000; image-rendering: pixelated; margin: auto; display: block}
     </style>
-    <script src="https://susam.github.io/pcface/src/pcface.js"></script>
-    <script src="https://susam.github.io/pcface/out/moderndos-8x16/fontmap.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pcface/src/pcface.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pcface/out/moderndos-8x16/fontmap.js"></script>
     <script>
       'use strict'
       window.addEventListener('load', function () {
@@ -421,8 +421,8 @@ Here is another example that loads a font list instead of a font map:
       body {background: #111}
       canvas {background: #000; image-rendering: pixelated; margin: auto; display: block}
     </style>
-    <script src="https://susam.github.io/pcface/src/pcface.js"></script>
-    <script src="https://susam.github.io/pcface/out/moderndos-8x16/fontlist.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pcface/src/pcface.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pcface/out/moderndos-8x16/fontlist.js"></script>
     <script>
       'use strict'
       window.addEventListener('load', function () {
