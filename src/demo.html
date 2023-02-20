@@ -6,6 +6,9 @@
     <style>
       body {
         background: #111;
+        color: #bbb;
+        font-family: helvetica, arial, sans-serif;
+        line-height: 1.5;
         margin: 0;
       }
       canvas {
@@ -18,11 +21,29 @@
       }
       select {
         background: #000;
-        color: #ccc;
+        color: #bbb;
+        font-size: 1em;
         border: 1px solid #333;
         margin: 0 auto;
         display: block;
         height: 2em;
+      }
+      p {
+        max-width: 40em;
+        margin: 2em auto;
+        text-align: center;
+      }
+      a:link {
+        color: #9bf;
+      }
+      a:visited {
+        color: #caf;
+      }
+      a:focus, a:hover {
+        color: #9cf;
+      }
+      a:active {
+        color: #f99;
       }
     </style>
     <script src="../out/moderndos-8x16/fontlist.js"></script>
@@ -193,5 +214,10 @@
     <canvas id="canvas1"></canvas>
     <canvas id="canvas2"></canvas>
     <select id="select"></select>
+    <p>
+      This is a demo of PC Face. To learn more about what PC Face is
+      and how to use it,
+      visit <a href="https://github.com/susam/pcface">github.com/susam/pcface</a>.
+    </p>
   </body>
 </html>
