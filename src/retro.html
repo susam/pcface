@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PC Face Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <style>
+      body {
+        background: #111;
+        margin: 0;
+      }
+      canvas {
+        background: #000;
+        display: block;
+        margin: 0 auto;
+        box-sizing: border-box;
+        border: 1px solid #333;
+        image-rendering: pixelated;
+      }
+      select {
+        background: #000;
+        color: #ccc;
+        border: 1px solid #333;
+        margin: 0 auto;
+        box-sizing: border-box;
+        display: block;
+      }
+    </style>
+    <script src="../out/moderndos-8x16/fontlist.js"></script>
+    <script src="../out/moderndos-8x16/fontmap.js"></script>
+    <script src="../out/oldschool-bios-8x8/fontlist.js"></script>
+    <script src="../out/oldschool-bios-8x8/fontmap.js"></script>
+    <script src="../out/oldschool-cga-8x8/fontlist.js"></script>
+    <script src="../out/oldschool-cga-8x8/fontmap.js"></script>
+    <script src="../out/oldschool-mda-9x14/fontlist.js"></script>
+    <script src="../out/oldschool-mda-9x14/fontmap.js"></script>
+    <script src="../out/oldschool-ega-8x14/fontlist.js"></script>
+    <script src="../out/oldschool-ega-8x14/fontmap.js"></script>
+    <script src="../out/oldschool-vga-9x16/fontlist.js"></script>
+    <script src="../out/oldschool-vga-9x16/fontmap.js"></script>
+    <script src="../out/oldschool-vga-9x14/fontlist.js"></script>
+    <script src="../out/oldschool-vga-9x14/fontmap.js"></script>
+    <script src="../out/oldschool-vga-8x16/fontlist.js"></script>
+    <script src="../out/oldschool-vga-8x16/fontmap.js"></script>
+    <script src="../out/oldschool-pgc-8x16/fontlist.js"></script>
+    <script src="../out/oldschool-pgc-8x16/fontmap.js"></script>
+    <script src="../out/oldschool-model30-8x16/fontlist.js"></script>
+    <script src="../out/oldschool-model30-8x16/fontmap.js"></script>
+    <script src="../out/oldschool-verite-8x16/fontlist.js"></script>
+    <script src="../out/oldschool-verite-8x16/fontmap.js"></script>
+    <script src="pcface.js"></script>
+    <script>
+      'use strict'
+
+      const SELECT_HEIGHT = 30
+      const PADDING = 10
+      const DEMO = {
+        'moderndos-8x16-font-list': PC_FACE_MODERNDOS_8X16_FONT_LIST,
+        'moderndos-8x16-font-map': PC_FACE_MODERNDOS_8X16_FONT_MAP,
+        'oldschool-bios-8x8-font-list': PC_FACE_OLDSCHOOL_BIOS_8X8_FONT_LIST,
+        'oldschool-bios-8x8-font-map': PC_FACE_OLDSCHOOL_BIOS_8X8_FONT_MAP,
+        'oldschool-cga-8x8-font-list': PC_FACE_OLDSCHOOL_CGA_8X8_FONT_LIST,
+        'oldschool-cga-8x8-font-map': PC_FACE_OLDSCHOOL_CGA_8X8_FONT_MAP,
+        'oldschool-mda-9x14-font-list': PC_FACE_OLDSCHOOL_MDA_9X14_FONT_LIST,
+        'oldschool-mda-9x14-font-map': PC_FACE_OLDSCHOOL_MDA_9X14_FONT_MAP,
+        'oldschool-ega-8x14-font-list': PC_FACE_OLDSCHOOL_EGA_8X14_FONT_LIST,
+        'oldschool-ega-8x14-font-map': PC_FACE_OLDSCHOOL_EGA_8X14_FONT_MAP,
+        'oldschool-vga-9x16-font-list': PC_FACE_OLDSCHOOL_VGA_9X16_FONT_LIST,
+        'oldschool-vga-9x16-font-map': PC_FACE_OLDSCHOOL_VGA_9X16_FONT_MAP,
+        'oldschool-vga-9x14-font-list': PC_FACE_OLDSCHOOL_VGA_9X14_FONT_LIST,
+        'oldschool-vga-9x14-font-map': PC_FACE_OLDSCHOOL_VGA_9X14_FONT_MAP,
+        'oldschool-vga-8x16-font-list': PC_FACE_OLDSCHOOL_VGA_8X16_FONT_LIST,
+        'oldschool-vga-8x16-font-map': PC_FACE_OLDSCHOOL_VGA_8X16_FONT_MAP,
+        'oldschool-pgc-8x16-font-list': PC_FACE_OLDSCHOOL_PGC_8X16_FONT_LIST,
+        'oldschool-pgc-8x16-font-map': PC_FACE_OLDSCHOOL_PGC_8X16_FONT_MAP,
+        'oldschool-model30-8x16-font-list': PC_FACE_OLDSCHOOL_MODEL30_8X16_FONT_LIST,
+        'oldschool-model30-8x16-font-map': PC_FACE_OLDSCHOOL_MODEL30_8X16_FONT_MAP,
+        'oldschool-verite-8x16-font-list': PC_FACE_OLDSCHOOL_VERITE_8X16_FONT_LIST,
+        'oldschool-verite-8x16-font-map': PC_FACE_OLDSCHOOL_VERITE_8X16_FONT_MAP
+      }
+
+      let canvas
+      let select
+      let ctx
+
+      function init () {
+        canvas = document.getElementById('canvas')
+        select = document.getElementById('select')
+        ctx = canvas.getContext('2d')
+        select.style.marginTop = PADDING + 'px'
+        select.style.marginBottom = PADDING + 'px'
+        select.style.height = SELECT_HEIGHT + 'px'
+        for (const key in DEMO) {
+          const option = document.createElement('option')
+          option.value = key
+          option.innerHTML = key
+          select.appendChild(option)
+        }
+        if (window.location.hash !== '') {
+          select.value = window.location.hash.substring(1)
+        }
+        setDemo()
+        window.addEventListener('resize', resizeCanvas)
+        window.addEventListener('hashchange', setDemo)
+        select.addEventListener('change', setHash)
+      }
+
+      function fontListDemo (fontList, fontWidth, fontHeight) {
+        ctx.fillStyle = '#3f3'
+        const ss1 = pcface.ranges(0, 256, 80)
+        const ss2 = pcface.ranges(0, 256, 40)
+        pcface.drawStrings(fontList, ctx, fontWidth, fontHeight,
+          ss1, 0, 0, 1)
+        pcface.drawStrings(fontList, ctx, fontWidth, fontHeight,
+          ss2, 0, 5 * fontHeight, 2)
+      }
+
+      function fontMapDemo (fontMap, fontWidth, fontHeight) {
+        ctx.fillStyle = '#fc0'
+        const ss1 = [
+          '\0☺☻♥♦♣♠•◘○◙♂♀♪♫☼►◄↕‼¶§▬↨↑↓→←∟↔▲▼ !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNO',
+          'PQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~⌂ÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜ¢£¥₧ƒ',
+          'áíóúñÑªº¿⌐¬½¼¡«»░▒▓│┤╡╢╖╕╣║╗╝╜╛┐└┴┬├─┼╞╟╚╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┘┌█▄▌▐▀αßΓπΣσµτΦΘΩδ∞φε∩',
+          '≡±≥≤⌠⌡÷≈°∙·√ⁿ²■\xa0'
+        ]
+        const ss2 = [
+          '\0☺☻♥♦♣♠•◘○◙♂♀♪♫☼►◄↕‼¶§▬↨↑↓→←∟↔▲▼ !"#$%&\'',
+          '()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNO',
+          'PQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvw',
+          'xyz{|}~⌂ÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜ¢£¥₧ƒ',
+          'áíóúñÑªº¿⌐¬½¼¡«»░▒▓│┤╡╢╖╕╣║╗╝╜╛┐└┴┬├─┼╞╟',
+          '╚╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┘┌█▄▌▐▀αßΓπΣσµτΦΘΩδ∞φε∩',
+          '≡±≥≤⌠⌡÷≈°∙·√ⁿ²■\xa0'
+        ]
+        pcface.drawStrings(fontMap, ctx, fontWidth, fontHeight,
+          ss1, 0, 0, 1)
+        pcface.drawStrings(fontMap, ctx, fontWidth, fontHeight,
+          ss2, 0, 5 * fontHeight, 2)
+      }
+
+      function resizeCanvas () {
+        document.body.style.padding = PADDING + 'px'
+        const availableHeight = window.innerHeight - 3 * PADDING - SELECT_HEIGHT
+        const availableWidth = window.innerWidth - 2 * PADDING
+        const scaledCanvasHeight = Math.min(
+          availableHeight, availableWidth * canvas.height / canvas.width)
+        const scaledCanvasWidth = scaledCanvasHeight * canvas.width / canvas.height
+        canvas.style.width = scaledCanvasWidth + 'px'
+        canvas.style.height = scaledCanvasHeight + 'px'
+      }
+
+      function setHash () {
+        window.location.hash = '#' + select.value
+      }
+
+      function setDemo () {
+        let name
+        if (window.location.hash === '') {
+          name = Object.keys(DEMO)[0]
+        } else {
+          name = window.location.hash.substring(1)
+        }
+        const bitmaps = DEMO[name]
+        const match = name.match(/^.*-(\d+)x(\d+)-font-(.*)$/)
+        const fontWidth = match[1]
+        const fontHeight = match[2]
+        const bitmapType = match[3]
+        const demoFunction = bitmapType === 'list' ? fontListDemo : fontMapDemo
+
+        canvas.width = 80 * fontWidth
+        canvas.height = 480
+
+        ctx.fillStyle = '#000'
+        ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+        demoFunction(bitmaps, fontWidth, fontHeight)
+        resizeCanvas()
+      }
+
+      window.addEventListener('load', init)
+    </script>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <select id="select"></select>
+  </body>
+</html>

@@ -1,0 +1,20 @@
+ABOUT UPDATING OLDER VERSIONS OF THE OLDSCHOOL FONT PACK TO V2.2
+
+Upgrading from v2.1:
+
+    Simply install/replace the fonts you need (keep in mind that older 'Plus'
+    fonts have been updated - see released note)
+
+Upgrading from v2.0:
+
+    Nothing major to do here; the only fonts that should be removed are
+    "Olivetti MxVGA", "DG One Alt", "DG One Alt-2y" (see release notes for
+    v2.1).  The rest can be overwritten.
+
+Upgrading from v1.x:
+
+    If you have any fonts from v1.x of the pack installed on your systems, I
+    *strongly recommend* removing all older "Bm" and "Px" fonts before you
+    install any from v2.1.  Quite a few fonts have been renamed or have
+    changed roles, so keeping the older versions will leave you with
+    duplicates and with an inconsistent set.

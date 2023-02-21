@@ -1,0 +1,7 @@
+pcface module
+=============
+
+.. automodule:: pcface
+   :members:
+   :undoc-members:
+   :show-inheritance:

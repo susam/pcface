@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PC Face Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <style>
+      body {
+        background: #111;
+        color: #bbb;
+        font-family: helvetica, arial, sans-serif;
+        line-height: 1.5;
+        margin: 0;
+      }
+      canvas {
+        background: #000;
+        display: block;
+        margin: 2em auto;
+        border: 1px solid #333;
+        image-rendering: pixelated;
+      }
+      select {
+        background: #000;
+        color: #bbb;
+        font-size: 1em;
+        border: 1px solid #333;
+        margin: 0 auto;
+        display: block;
+        height: 2em;
+      }
+      p {
+        max-width: 40em;
+        margin: 2em auto;
+        text-align: center;
+      }
+      a:link {
+        color: #9bf;
+      }
+      a:visited {
+        color: #caf;
+      }
+      a:focus, a:hover {
+        color: #9cf;
+      }
+      a:active {
+        color: #f99;
+      }
+    </style>
+    <script src="../out/moderndos-8x16/fontlist.js"></script>
+    <script src="../out/moderndos-8x16/fontmap.js"></script>
+    <script src="../out/oldschool-bios-8x8/fontlist.js"></script>
+    <script src="../out/oldschool-bios-8x8/fontmap.js"></script>
+    <script src="../out/oldschool-cga-8x8/fontlist.js"></script>
+    <script src="../out/oldschool-cga-8x8/fontmap.js"></script>
+    <script src="../out/oldschool-mda-9x14/fontlist.js"></script>
+    <script src="../out/oldschool-mda-9x14/fontmap.js"></script>
+    <script src="../out/oldschool-ega-8x14/fontlist.js"></script>
+    <script src="../out/oldschool-ega-8x14/fontmap.js"></script>
+    <script src="../out/oldschool-vga-9x16/fontlist.js"></script>
+    <script src="../out/oldschool-vga-9x16/fontmap.js"></script>
+    <script src="../out/oldschool-vga-9x14/fontlist.js"></script>
+    <script src="../out/oldschool-vga-9x14/fontmap.js"></script>
+    <script src="../out/oldschool-vga-8x16/fontlist.js"></script>
+    <script src="../out/oldschool-vga-8x16/fontmap.js"></script>
+    <script src="../out/oldschool-pgc-8x16/fontlist.js"></script>
+    <script src="../out/oldschool-pgc-8x16/fontmap.js"></script>
+    <script src="../out/oldschool-model30-8x16/fontlist.js"></script>
+    <script src="../out/oldschool-model30-8x16/fontmap.js"></script>
+    <script src="../out/oldschool-verite-8x16/fontlist.js"></script>
+    <script src="../out/oldschool-verite-8x16/fontmap.js"></script>
+    <script src="pcface.js"></script>
+    <script>
+      'use strict'
+
+      const FONT_SCALE = 2
+
+      const DEMO = {
+        'moderndos-8x16': [
+          PC_FACE_MODERNDOS_8X16_FONT_LIST,
+          PC_FACE_MODERNDOS_8X16_FONT_MAP
+        ],
+        'oldschool-bios-8x8': [
+          PC_FACE_OLDSCHOOL_BIOS_8X8_FONT_LIST,
+          PC_FACE_OLDSCHOOL_BIOS_8X8_FONT_MAP
+        ],
+        'oldschool-cga-8x8': [
+          PC_FACE_OLDSCHOOL_CGA_8X8_FONT_LIST,
+          PC_FACE_OLDSCHOOL_CGA_8X8_FONT_MAP
+        ],
+        'oldschool-mda-9x14': [
+          PC_FACE_OLDSCHOOL_MDA_9X14_FONT_LIST,
+          PC_FACE_OLDSCHOOL_MDA_9X14_FONT_MAP
+        ],
+        'oldschool-ega-8x14': [
+          PC_FACE_OLDSCHOOL_EGA_8X14_FONT_LIST,
+          PC_FACE_OLDSCHOOL_EGA_8X14_FONT_MAP
+        ],
+        'oldschool-vga-9x16': [
+          PC_FACE_OLDSCHOOL_VGA_9X16_FONT_LIST,
+          PC_FACE_OLDSCHOOL_VGA_9X16_FONT_MAP
+        ],
+        'oldschool-vga-9x14': [
+          PC_FACE_OLDSCHOOL_VGA_9X14_FONT_LIST,
+          PC_FACE_OLDSCHOOL_VGA_9X14_FONT_MAP
+        ],
+        'oldschool-vga-8x16': [
+          PC_FACE_OLDSCHOOL_VGA_8X16_FONT_LIST,
+          PC_FACE_OLDSCHOOL_VGA_8X16_FONT_MAP
+        ],
+        'oldschool-pgc-8x16': [
+          PC_FACE_OLDSCHOOL_PGC_8X16_FONT_LIST,
+          PC_FACE_OLDSCHOOL_PGC_8X16_FONT_MAP
+        ],
+        'oldschool-model30-8x16': [
+          PC_FACE_OLDSCHOOL_MODEL30_8X16_FONT_LIST,
+          PC_FACE_OLDSCHOOL_MODEL30_8X16_FONT_MAP
+        ],
+        'oldschool-verite-8x16': [
+          PC_FACE_OLDSCHOOL_VERITE_8X16_FONT_LIST,
+          PC_FACE_OLDSCHOOL_VERITE_8X16_FONT_MAP
+        ]
+      }
+
+      function init () {
+        setOptions()
+        setDemo()
+        window.addEventListener('hashchange', setDemo)
+        select.addEventListener('change', setHash)
+      }
+
+      function setOptions () {
+        const select = document.getElementById('select')
+        for (const key in DEMO) {
+          const option = document.createElement('option')
+          option.value = key
+          option.innerHTML = key
+          select.appendChild(option)
+        }
+        if (window.location.hash !== '') {
+          select.value = window.location.hash.substring(1)
+        }
+      }
+
+      function setDemo () {
+        let name
+        if (window.location.hash === '') {
+          name = Object.keys(DEMO)[0]
+        } else {
+          name = window.location.hash.substring(1)
+        }
+        const fontList = DEMO[name][0]
+        const fontMap = DEMO[name][1]
+        const match = name.match(/^.*-(\d+)x(\d+)$/)
+        const fontWidth = match[1]
+        const fontHeight = match[2]
+        fontListDemo(fontList, fontWidth, fontHeight, FONT_SCALE)
+        fontMapDemo(fontMap, fontWidth, fontHeight, FONT_SCALE)
+      }
+
+      function fontListDemo (fontList, fontWidth, fontHeight, fontScale) {
+        const canvas = document.getElementById('canvas1')
+        const ctx = canvas.getContext('2d')
+
+        const codes = pcface.ranges(0, 256, 40)
+        const rows = codes.length
+        const cols = codes[0].length
+
+        canvas.width = cols * fontWidth * FONT_SCALE
+        canvas.height = rows * fontHeight * FONT_SCALE
+
+        ctx.fillStyle = '#022'
+        ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+        ctx.fillStyle = '#3f3'
+        pcface.drawStrings(fontList, ctx, fontWidth, fontHeight,
+          codes, 0, 0, fontScale)
+      }
+
+      function fontMapDemo (fontMap, fontWidth, fontHeight, fontScale) {
+        const canvas = document.getElementById('canvas2')
+        const ctx = canvas.getContext('2d')
+
+        const strings = [
+          '\0☺☻♥♦♣♠•◘○◙♂♀♪♫☼►◄↕‼¶§▬↨↑↓→←∟↔▲▼ !"#$%&\'',
+          '()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNO',
+          'PQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvw',
+          'xyz{|}~⌂ÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜ¢£¥₧ƒ',
+          'áíóúñÑªº¿⌐¬½¼¡«»░▒▓│┤╡╢╖╕╣║╗╝╜╛┐└┴┬├─┼╞╟',
+          '╚╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┘┌█▄▌▐▀αßΓπΣσµτΦΘΩδ∞φε∩',
+          '≡±≥≤⌠⌡÷≈°∙·√ⁿ²■\xa0'
+        ]
+        const rows = strings.length
+        const cols = strings[0].length
+
+        canvas.width = cols * fontWidth * FONT_SCALE
+        canvas.height = rows * fontHeight * FONT_SCALE
+
+        ctx.fillStyle = '#220'
+        ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+        ctx.fillStyle = '#fc0'
+        pcface.drawStrings(fontMap, ctx, fontWidth, fontHeight,
+          strings, 0, 0, fontScale)
+      }
+
+      function setHash () {
+        window.location.hash = '#' + select.value
+      }
+
+      window.addEventListener('load', init)
+    </script>
+  </head>
+  <body>
+    <canvas id="canvas1"></canvas>
+    <canvas id="canvas2"></canvas>
+    <select id="select"></select>
+    <p>
+      This is a demo of PC Face. To learn more about what PC Face is
+      and how to use it, visit
+      <a href="https://github.com/susam/pcface">github.com/susam/pcface</a>.
+    </p>
+  </body>
+</html>
