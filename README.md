@@ -13,8 +13,8 @@ original IBM PC OEM fonts.
 [CP437IMG]: https://susam.github.io/blob/img/pcface/pcface-0.2.0.png
 
 Additionally, this project includes a few Python functions to generate
-these bitmaps and a few JavaScript functions that demonstrate how to
-render these bitmaps on a graphical canvas.
+these bitmaps and a few JavaScript functions that render these bitmaps
+on a graphical canvas.
 
 Perhaps you are making a retro-style game where you want to take full
 control of what each pixel should be. Or perhaps you want to render
