@@ -57,9 +57,8 @@
    *
    * @param {Array|Object} bitmaps - An array/object containing bitmap arrays.
    * @param {CanvasRenderingContext2D} ctx - Canvas context.
-   * @param {Array|Object} bitmaps - An array or an object of bitmap arrays.
-   * @param {number} w - Horizontal width to allocate for each glyph.
    * @param {Array|string} s - Characers to draw on canvas.
+   * @param {number} w - Horizontal width to allocate for each glyph.
    * @param {number} x - X coordinate of the leftmost edge of the glyphs.
    * @param {number} y - Y coordinate of the topmost edge of the glyphs.
    * @param {number} scale - Scale multiplier (should be a positive integer).
