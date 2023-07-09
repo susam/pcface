@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>pcface module &#8212; PC Face  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="src" href="modules.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-pcface">
+<span id="pcface-module"></span><h1>pcface module<a class="headerlink" href="#module-pcface" title="Permalink to this heading">¶</a></h1>
+<p>Font preview and bitmap arrays generator.</p>
+<dl class="py function">
+<dt class="sig sig-object py" id="pcface.cp437">
+<span class="sig-prename descclassname"><span class="pre">pcface.</span></span><span class="sig-name descname"><span class="pre">cp437</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pcface.cp437" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all CP437 characters in ascending order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>All CP437 characters as a string.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pcface.main">
+<span class="sig-prename descclassname"><span class="pre">pcface.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pcface.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate previews, graphs, and bitmap arrays.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pcface.make_bitmap">
+<span class="sig-prename descclassname"><span class="pre">pcface.</span></span><span class="sig-name descname"><span class="pre">make_bitmap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">char</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pcface.make_bitmap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create bitmap for a given character.</p>
+<p>The given font file is used to internally render the given
+character in memory. Then the rendered character in memory is read
+pixel by pixel to generate its bitmap. The returned value is a
+list of integers where each integer represents the bitmap of a row
+of pixels of the rendered character. The entire list of bitmaps
+returned represents all rows of pixels of the rendered character.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>char</strong> (<em>str</em>) – Character to create bitmap for.</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – Path to font file.</p></li>
+<li><p><strong>size</strong> (<em>int</em>) – Font size that creates rendered glyph of given height.</p></li>
+<li><p><strong>width</strong> (<em>int</em>) – Width of each glyph in the given font.</p></li>
+<li><p><strong>height</strong> (<em>int</em>) – Height of each glyph in the given font.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Bitmap for the given character rendered with the
+given font.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pcface.make_bitmaps">
+<span class="sig-prename descclassname"><span class="pre">pcface.</span></span><span class="sig-name descname"><span class="pre">make_bitmaps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pcface.make_bitmaps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create bitmaps for all given characters.</p>
+<p>For each character in <code class="docutils literal notranslate"><span class="pre">chars</span></code>, the bitmap of the character is
+computed as specified in docstring of <a class="reference internal" href="#pcface.make_bitmap" title="pcface.make_bitmap"><code class="xref py py-func docutils literal notranslate"><span class="pre">make_bitmap()</span></code></a>. A list
+of bitmaps, one bitmap for each character, is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chars</strong> (<em>str</em>) – One or more characters.</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – Path to font file.</p></li>
+<li><p><strong>size</strong> (<em>int</em>) – Font size that creates rendered glyph of given height.</p></li>
+<li><p><strong>width</strong> (<em>int</em>) – Width of each glyph in the given font.</p></li>
+<li><p><strong>height</strong> (<em>int</em>) – Height of each glyph in the given font.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of bitmaps.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[list[int]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pcface.make_font_list">
+<span class="sig-prename descclassname"><span class="pre">pcface.</span></span><span class="sig-name descname"><span class="pre">make_font_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bitmaps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">const_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pcface.make_font_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create JavaScript code to represent bitmaps as an array of arrays.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chars</strong> (<em>str</em>) – One or more characters.</p></li>
+<li><p><strong>bitmaps</strong> (<em>list</em><em>[</em><em>list</em><em>[</em><em>int</em><em>]</em><em>]</em>) – A list of corresponding bitmaps.</p></li>
+<li><p><strong>const_name</strong> (<em>str</em>) – JavaScript constant name to assign the array to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>JavaScript code that represents bitmaps as an array of arrays.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pcface.make_font_map">
+<span class="sig-prename descclassname"><span class="pre">pcface.</span></span><span class="sig-name descname"><span class="pre">make_font_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bitmaps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">const_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pcface.make_font_map" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create JavaScript code to represent bitmaps as an object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chars</strong> (<em>str</em>) – One or more characters.</p></li>
+<li><p><strong>bitmaps</strong> (<em>list</em><em>[</em><em>list</em><em>[</em><em>int</em><em>]</em><em>]</em>) – A list of corresponding bitmaps.</p></li>
+<li><p><strong>const_name</strong> (<em>str</em>) – Constant name to assign the object to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>JavaScript code that represents bitmaps as an object that
+maps each CP437 character (represented as Unicode) to its bitmap
+(an array of integers).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pcface.make_graph">
+<span class="sig-prename descclassname"><span class="pre">pcface.</span></span><span class="sig-name descname"><span class="pre">make_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bitmap</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pcface.make_graph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create ASCII graph of the given bitmap.</p>
+<p>The text representation of bitmap is a multiline string where each
+line represents one integer of the bitmap list. Each 0-bit of the
+bitmap is represented with the character <cite>symbols[0]</cite>. Similarly,
+each 1-bit of the bitmap is represented with the character
+<cite>symbols[1]</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bitmap</strong> (<em>list</em><em>[</em><em>int</em><em>]</em>) – Bitmap of a single glyph.</p></li>
+<li><p><strong>width</strong> (<em>int</em>) – Width of each glyph.</p></li>
+<li><p><strong>symbols</strong> (<em>str</em>) – Symbols to use 0 and 1 in the graph.</p></li>
+<li><p><strong>prefix</strong> (<em>bool</em>) – Whether to prefix each line of output with an
+integer that represents the bitmap value for the
+corresponding row of the glyph.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>ASCII graph of the bitmap of the given character.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pcface.make_graphs">
+<span class="sig-prename descclassname"><span class="pre">pcface.</span></span><span class="sig-name descname"><span class="pre">make_graphs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chars</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bitmaps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pcface.make_graphs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create ASCII graphs of given bitmaps.</p>
+<p>The returned value is a multiline string that represents text
+representations of one or more characters specified in <cite>chars</cite>.
+The bitmap representation of each character consists of the string
+returned by func:<cite>make_graph</cite>. In the returned value, each bitmap
+representation is preceded by one line of header that shows the
+character representation and the ASCII code of the character.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chars</strong> (<em>str</em>) – One or more characters.</p></li>
+<li><p><strong>bitmaps</strong> (<em>list</em><em>[</em><em>list</em><em>[</em><em>int</em><em>]</em><em>]</em>) – A list of corresponding bitmaps.</p></li>
+<li><p><strong>width</strong> (<em>int</em>) – Width of each glyph.</p></li>
+<li><p><strong>symbols</strong> (<em>str</em>) – Symbols to use 0 and 1 in the graph.</p></li>
+<li><p><strong>prefix</strong> (<em>bool</em>) – Whether to prefix each line of output with an
+integer that represents the bitmap value for the
+corresponding row of the glyph.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A string containing the ASCII graphs of the bitmaps.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pcface.make_preview">
+<span class="sig-prename descclassname"><span class="pre">pcface.</span></span><span class="sig-name descname"><span class="pre">make_preview</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cols</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scale</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pcface.make_preview" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a preview of the given text rendered with given font.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>text</strong> (<em>char</em>) – Text to create a preview image for.</p></li>
+<li><p><strong>path</strong> (<em>str</em>) – Path to font file.</p></li>
+<li><p><strong>size</strong> (<em>int</em>) – Font size that creates rendered glyph of given height.</p></li>
+<li><p><strong>cols</strong> (<em>int</em>) – Width of preview in terms of number of character columns.</p></li>
+<li><p><strong>width</strong> (<em>int</em>) – Width of each glyph in the given font.</p></li>
+<li><p><strong>height</strong> (<em>int</em>) – Height of each glyph in the given font.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Preview image.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Image</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">PC Face</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">pcface module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pcface.cp437"><code class="docutils literal notranslate"><span class="pre">cp437()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pcface.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pcface.make_bitmap"><code class="docutils literal notranslate"><span class="pre">make_bitmap()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pcface.make_bitmaps"><code class="docutils literal notranslate"><span class="pre">make_bitmaps()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pcface.make_font_list"><code class="docutils literal notranslate"><span class="pre">make_font_list()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pcface.make_font_map"><code class="docutils literal notranslate"><span class="pre">make_font_map()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pcface.make_graph"><code class="docutils literal notranslate"><span class="pre">make_graph()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pcface.make_graphs"><code class="docutils literal notranslate"><span class="pre">make_graphs()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pcface.make_preview"><code class="docutils literal notranslate"><span class="pre">make_preview()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">src</a><ul>
+      <li>Previous: <a href="modules.html" title="previous chapter">src</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Susam Pal.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="../_sources/api/pcface.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

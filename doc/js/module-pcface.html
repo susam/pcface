@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Module: pcface</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Module: pcface</h1>
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Exported module of PC Face.</p></div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pcface.js.html">pcface.js</a>, <a href="pcface.js.html#line9">line 9</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".drawChar"><span class="type-signature">(static) </span>drawChar<span class="signature">(bitmaps, ctx, c, x, y, scale)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Draw a single character on a canvas using the given canvas
+context. The (x, y) coordinates represent the top-left corner of
+the glyph. The x-coordinate represents the column index the
+leftmost edge of the glyph. Similarly, the y-coordinate
+represents the row index of the topmost edge of the glyph. The
+character <code>c</code> may either be an integer ASCII code of a CP437
+character or a string containing a single Unicode character that
+represents a CP437 character.</p>
+<p>If <code>c</code> is an ASCII code, then <code>bitmaps</code> must be an array of
+bitmaps. If <code>s</code> is a string containing a single Unicode
+character, then <code>bitmaps</code> must be an object that maps each
+Unicode character that represents a CP437 character to its
+bitmap array.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>bitmaps</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+|
+
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>An array/object containing bitmap arrays.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ctx</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">CanvasRenderingContext2D</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Canvas context.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>c</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+|
+
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Character to draw on canvas.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>X coordinate of the leftmost edge of the glyph.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Y coordinate of the topmost edge of the glyph.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>scale</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Scale multiplier.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pcface.js.html">pcface.js</a>, <a href="pcface.js.html#line34">line 34</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".drawString"><span class="type-signature">(static) </span>drawString<span class="signature">(bitmaps, ctx, s, w, x, y, scale)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Draw a single string with its top-left corner placed at
+coordinate (x, y). The string <code>s</code> may either be an array of
+integers where each integer is an ASCII code of a CP437 character
+of it may be a string of Unicode characters where each Unicode
+character represents a CP437 character.</p>
+<p>If <code>s</code> is an array of ASCII codes, then <code>bitmaps</code> must be an
+array of bitmaps. If <code>s</code> is a string of Unicode characters, then
+<code>bitmaps</code> must be an object that maps each Unicode character that
+represents a CP437 character to its bitmap array.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>bitmaps</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+|
+
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>An array/object containing bitmap arrays.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ctx</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">CanvasRenderingContext2D</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Canvas context.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>s</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+|
+
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Characers to draw on canvas.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>w</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Horizontal width to allocate for each glyph.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>X coordinate of the leftmost edge of the glyphs.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Y coordinate of the topmost edge of the glyphs.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>scale</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Scale multiplier (should be a positive integer).</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pcface.js.html">pcface.js</a>, <a href="pcface.js.html#line66">line 66</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".drawStrings"><span class="type-signature">(static) </span>drawStrings<span class="signature">(ctx, bitmaps, w, h, ss, x, y, scale)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Draw multiple strings with the top-left corner of the first
+string placed at coordinate (x, y). Each subsequent string is
+placed below the previous one. The height <code>h</code> specifies the
+distance between the top edge of one string and the top edge of
+the next one. The width <code>w</code> specifies the distance between the
+left edge of one glyph and the left edge of the next one.</p>
+<p>The string <code>s</code> may either be an array of array of integers where
+each integer is an ASCII code of a CP437 character of it may be
+an array of strings of Unicode characters where each Unicode
+character represents a CP437 character.</p>
+<p>If <code>s</code> is an array of array of ASCII codes, then <code>bitmaps</code> must
+be an array of bitmaps. If <code>s</code> is an array of strings of Unicode
+characters, then <code>bitmaps</code> must be an object that maps each
+Unicode character that represents a CP437 character to its
+bitmap.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>ctx</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">CanvasRenderingContext2D</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Canvas context.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>bitmaps</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+|
+
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>An array or an object of bitmap arrays.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>w</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Horizontal width to allocate for each glyph.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>h</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Horizontal height to allocate for each glyph.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ss</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>An array of array of integers or an array of strings.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>X coordinate of the leftmost edge of the glyphs.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Y coordinate of the topmost edge of the glyphs.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>scale</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Scale multiplier (should be a positive integer).</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pcface.js.html">pcface.js</a>, <a href="pcface.js.html#line100">line 100</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".range"><span class="type-signature">(static) </span>range<span class="signature">(start, stop)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Create an array of consecutive integers with <code>start</code> as the first
+integer and <code>stop - 1</code> as the last integer in the array. This
+function may be useful for creating a range of CP437 character
+codes for demos. For example, calling <code>pcface.range(65, 70)</code>
+returns <code>[65, 66, 67, 68, 69]</code> which can then be passed to
+<a href="module-pcface.html#.drawString"><code>module:pcface.drawString</code></a> to draw the glyphs
+represented by these integers.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>start</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Start integer.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>stop</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Stop integer.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pcface.js.html">pcface.js</a>, <a href="pcface.js.html#line118">line 118</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".ranges"><span class="type-signature">(static) </span>ranges<span class="signature">(start, stop, chunk)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Return an array of arrays of integers. This function may be
+useful for creating ranges of CP437 character codes for demos.
+All nested arrays together contain consecutive integers from
+<code>start</code> to <code>stop - 1</code>. These integers are split into multiple
+nested arrays such that each nested array contains no more than
+<code>chunk</code> number of integers. For example, calling
+<code>pcface.range(65, 78, 5)</code> returns <code>[[65, 66, 67, 68, 69], [70, 71, 72, 73, 74], [75, 76, 77]]</code>. This array of arrays can then be
+passed to <a href="module-pcface.html#.drawStrings"><code>module:pcface.drawStrings</code></a> to draw the
+glyphs represented by these integers.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>start</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Start integer.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>stop</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Stop integer.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>chunk</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Maximum length of each nested array.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pcface.js.html">pcface.js</a>, <a href="pcface.js.html#line142">line 142</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-pcface.html">pcface</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Sun Jul 09 2023 01:03:40 GMT+0100 (British Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
