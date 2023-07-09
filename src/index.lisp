@@ -119,7 +119,7 @@
 ~a  </table>
 </main>
 <hr>
-<footer>&copy; 2018-~a Susam Pal</footer>
+<footer>&copy; ~a Susam Pal</footer>
 </body>
 </html>
 ")
