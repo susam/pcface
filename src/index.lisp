@@ -81,9 +81,7 @@
 
 (defun ignored-p (url-path)
   "Return t if given path should be ignored, nil otherwise."
-  (or (string-starts-with "." url-path)
-      (string= "index.html" url-path)
-      (string-ends-with "/index.html" url-path)))
+  (or (string-starts-with "." url-path)))
 
 (defvar *template* "
 <!DOCTYPE html>

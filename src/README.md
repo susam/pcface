@@ -50,6 +50,7 @@ Perform the following tasks for every release:
     ```sh
     git status
     git add -p
+    git commit
     git push
     ```
 

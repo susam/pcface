@@ -93,6 +93,8 @@ stage: clean doc
 	cp -R doc/ _site/doc/
 	make clean
 	cp -R src/ _site/src/
+	sed 's/\.\.\/out/out/; s/pcface.js/src\/pcface.js/' _site/src/demo.html > _site/index.html
+	sed 's/\.\.\/out/out/; s/pcface.js/src\/pcface.js/' _site/src/retro.html > _site/retro.html
 
 site: stage
 	sbcl --eval '(defvar *index* "index.html")' --load src/index.lisp --quit

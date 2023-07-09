@@ -23,12 +23,12 @@ provided in this project might turn out to be useful for such
 activities. The available bitmap arrays can be translated to pixels on
 screen or symbols for standard output to render CP437 glyphs.
 
-Visit [susam.github.io/pcface/src/demo.html][DEMO] to see a demo.
+Visit [susam.github.io/pcface/][DEMO] to see a demo.
 
 [PY]: src/pcface.py
 [JS]: src/pcface.js
-[DEMO]: https://susam.github.io/pcface/src/demo.html
-[RETRO]: https://susam.github.io/pcface/src/retro.html
+[DEMO]: https://susam.github.io/pcface/
+[RETRO]: https://susam.github.io/pcface/retro.html
 
 
 Contents
@@ -107,9 +107,9 @@ Demos
 ### Quick Demo
 
 For a quick demo of the various bitmaps available in this project,
-visit the demo page at [susam.github.io/pcface/src/demo.html][DEMO].
-There is a dropdown menu at the bottom that can be used to select
-bitmaps for different fonts.
+visit the demo page at [susam.github.io/pcface/][DEMO]. There is a
+dropdown menu at the bottom that can be used to select bitmaps for
+different fonts.
 
 This demo exercises both a font list from `fontlist.js` and a font map
 from `fontmap.js` for the selected font. The font list demo is shown
@@ -127,7 +127,7 @@ its bitmap array.
 ### Detailed Demo
 
 There is another slightly more detailed demo available at
-[susam.github.io/pcface/src/retro.html][RETRO].
+[susam.github.io/pcface/retro.html][RETRO].
 
 In the demo page, you would notice that each bitmap demo comes in two
 variants: one with the suffix `font-list` and another with the suffix
